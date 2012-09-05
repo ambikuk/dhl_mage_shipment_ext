@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><res:ShipmentValidateResponse xmlns:res='http://www.dhl.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation= 'http://www.dhl.com ship-val-res.xsd'>
+    <Response>
+        <ServiceHeader>
+            <MessageTime>2012-06-07T09:28:09+01:00</MessageTime>
+            <MessageReference>0000000000000000PKU20110000183</MessageReference>
+            <SiteID>Dnvpssin</SiteID>
+        </ServiceHeader>
+    </Response>
+    <Note>
+        <ActionNote>Success</ActionNote>
+    </Note>
+    <AirwayBillNumber>4142800071</AirwayBillNumber>
+    <BillingCode>DSA</BillingCode>
+    <CurrencyCode>USD</CurrencyCode>
+    <CourierMessage>Bunker Fuel Sample IATA SP A3</CourierMessage>
+    <DestinationServiceArea>
+        <ServiceAreaCode>RTM</ServiceAreaCode>
+        <FacilityCode>RTM</FacilityCode>
+        <InboundSortCode/>
+    </DestinationServiceArea>
+    <OriginServiceArea>
+        <ServiceAreaCode>LEG</ServiceAreaCode>
+        <OutboundSortCode/>
+    </OriginServiceArea>
+    <Rated>N</Rated>
+    <WeightUnit>K</WeightUnit>
+    <ChargeableWeight>2</ChargeableWeight>
+    <DimensionalWeight>0.8</DimensionalWeight>
+    <CountryCode>IT</CountryCode>
+    <Barcodes>
+        <AWBBarCode>iVBORw0KGgoAAAANSUhEUgAAAYwAAABeAQMAAAAKdrGZAAAABlBMVEX///8AAABVwtN+AAAAZ0lEQVR42mNkYGBIyL8w5a9P8IWJZmIBwSKbp81tm6+Uf+r/MruAr0afG1ZOmPLXPAMk6XpvvtICBgYmBpLBqJZRLaNaRrWMahnVMqplVMuollEto1pGtYxqGdUyqmVUy6iWUS2kAgBrAhe86t5r+gAAAABJRU5ErkJggg==</AWBBarCode>
+        <OriginDestnBarcode>iVBORw0KGgoAAAANSUhEUgAAATUAAABeAQMAAAB4lRFqAAAABlBMVEX///8AAABVwtN+AAAAVUlEQVR42mNkYGBIyL8whVtj5YQpa98wfDX68pR5ywZuu7m3PlflAxlK+RcmXmBgYGIgDoyqG1U3qm5U3ai6UXWj6kbVjaobVTeqblTdqLpRddRQBwBquxK8w3ZZbAAAAABJRU5ErkJggg==</OriginDestnBarcode>
+        <DHLRoutingBarCode>iVBORw0KGgoAAAANSUhEUgAAAdgAAABeAQMAAAC6iZerAAAABlBMVEX///8AAABVwtN+AAAAeElEQVR42u3LIRKCQACG0R87heLYpHAQE81OYcbgSCGQQMrazBSoBLgC16E4I4UDbFnuQCB9rz9PUuXX8znvO5tGt4sZFVtNn1/W6Pt012L8B3cTrC5sjRJ5Lw3d8i6Hh3TSflwul8vlcrlcLpfL5XK5XC6Xyz3mbjGCGLxtmEKTAAAAAElFTkSuQmCC</DHLRoutingBarCode>
+    </Barcodes>
+    <Piece>2</Piece>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+    <Reference>
+        <ReferenceID>SEASENATOR</ReferenceID>
+        <ReferenceType>st</ReferenceType>
+    </Reference>
+    <Consignee>
+        <CompanyName>DNVPS Rotterdam</CompanyName>
+        <AddressLine>Zwolseweg 1, 2994 LB</AddressLine>
+        <AddressLine>Barendrecht The Netherlands</AddressLine>
+        <City>Rotterdam</City>
+        <Division>NA</Division>
+        <PostalCode>2994 LB</PostalCode>
+        <CountryCode>NL</CountryCode>
+        <CountryName>NL</CountryName>
+        <Contact>
+            <PersonName>Technical Department</PersonName>
+            <PhoneNumber>31.102922600</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>31.104797141</FaxNumber>
+            <Telex>911</Telex>
+        </Contact>
+    </Consignee>
+    <Shipper>
+        <ShipperID>952511964</ShipperID>
+        <CompanyName>G.PANESSA and  C.S.R.L.           </CompanyName>
+        <RegisteredAccount>952511964</RegisteredAccount>
+        <AddressLine>Steamship agents,international</AddressLine>
+        <AddressLine>freight forwarders, 11,SCALID</AddressLine>
+        <City>LIVORNO</City>
+        <Division>NA</Division>
+        <PostalCode>57121</PostalCode>
+        <CountryCode>IT</CountryCode>
+        <CountryName>IT</CountryName>
+        <Contact>
+            <PersonName>Ms Betty / Mr Riccardo            </PersonName>
+            <PhoneNumber>00390586270225</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>123123123</FaxNumber>
+            <Telex>911</Telex>
+        </Contact>
+    </Shipper>
+    <CustomerID>131297</CustomerID>
+    <ShipmentDate>2012-06-21</ShipmentDate>
+    <GlobalProductCode>U</GlobalProductCode>
+    <SpecialService>
+        <SpecialServiceType>S</SpecialServiceType>
+        <CommunicationType>P</CommunicationType>
+        <ChargeValue>33.10</ChargeValue>
+        <CurrencyCode>USD</CurrencyCode>
+    </SpecialService>
+    <Billing>
+        <ShipperAccountNumber>952511964</ShipperAccountNumber>
+        <ShippingPaymentType>S</ShippingPaymentType>
+        <BillingAccountNumber>952511964</BillingAccountNumber>
+        <DutyPaymentType>R</DutyPaymentType>
+    </Billing>
+    <Dutiable>
+        <DeclaredValue>2.00</DeclaredValue>
+        <DeclaredCurrency>USD</DeclaredCurrency>
+        <ShipperEIN>123456789</ShipperEIN>
+        <TermsOfTrade>DDP</TermsOfTrade>
+    </Dutiable>
+    <NewShipper>Y</NewShipper>
+    <DHLRoutingCode>NL2994LB+51000000</DHLRoutingCode>
+    <DHLRoutingDataId>2L</DHLRoutingDataId>
+    <ProductContentCode>ECX</ProductContentCode>
+    <ProductShortName>EXPRESS WORLDWIDE</ProductShortName>
+    <InternalServiceCode/>
+    <DeliveryDateCode/>
+    <DeliveryTimeCode/>
+    <Pieces>
+        <Piece>
+            <PieceNumber>1</PieceNumber>
+            <Depth>12</Depth>
+            <Width>8</Width>
+            <Height>22</Height>
+            <Weight>1</Weight>
+            <PackageType>OD</PackageType>
+            <DimWeight>0.422400</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011000000000492308</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAZUlEQVR42u3LIRJAUBhG0Y9AUhSSGVuxDEnUJSP440uCbkaxFssgUlWBNWjCPf14ktqom3bX9PlqocVHMD+WlvJqBbMSU5HpNlct15Ce2+gkX99xOBwOh8PhcDgcDofD4XA4fzov60YTvMJVyMEAAAAASUVORK5CYII=</LicensePlateBarCode>
+        </Piece>
+        <Piece>
+            <PieceNumber>2</PieceNumber>
+            <Depth>12</Depth>
+            <Width>8</Width>
+            <Height>22</Height>
+            <Weight>1</Weight>
+            <PackageType>OD</PackageType>
+            <DimWeight>0.422400</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011000000000492309</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAZklEQVR42u3LIRJAUBiF0Ut4LykKyYytWIYV6JIR/FGWFDOvWItlEFmDwBo04Tv9RJK6pF+OsR3KzbylpwuP5bWiRi4oM1WFbjtX6/x87dMoxfqOw+FwOBwOh8PhcDgcDofD+dN5AexSE7xzfHloAAAAAElFTkSuQmCC</LicensePlateBarCode>
+        </Piece>
+    </Pieces></res:ShipmentValidateResponse>
+

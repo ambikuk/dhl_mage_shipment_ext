@@ -1,0 +1,61 @@
+<req:BookPickupRequestEA xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com book-pickup-req_EA.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-18T08:47:21-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20110000183</MessageReference>
+      <SiteID>Site_ID</SiteID>
+      <Password>Password</Password>
+    </ServiceHeader>
+  </Request>
+  <Requestor>
+    <AccountType>D</AccountType>
+    <AccountNumber>952511964</AccountNumber>
+    <RequestorContact>
+      <PersonName>Master MT SEASENATOR              </PersonName>
+      <Phone>68876088</Phone>
+    </RequestorContact>
+    <CompanyName>G.PANESSA and  C.S.R.L.           </CompanyName>
+  </Requestor>
+  <Place>
+    <LocationType>R</LocationType>
+    <CompanyName>G.PANESSA and  C.S.R.L.           </CompanyName>
+    <Address1>Steamship agents,international</Address1>
+    <Address2>freight forwarders, 11,SCALID</Address2>
+    <PackageLocation>NA</PackageLocation>
+    <City>LIVORNO</City>
+    <CountryCode>IT</CountryCode>
+    <StateCode>NA</StateCode>
+    <PostalCode>57121</PostalCode>
+  </Place>
+  <Pickup>
+    <PickupDate>2012-06-16</PickupDate>
+    <ReadyByTime>10:00</ReadyByTime>
+    <CloseTime>18:00</CloseTime>
+  </Pickup>
+  <PickupContact>
+    <PersonName>Ms Betty / Mr Riccardo            </PersonName>
+    <Phone>00390586270225</Phone>
+  </PickupContact>
+  <ShipmentDetails>
+    <AccountType>D</AccountType>
+    <AccountNumber>952511964</AccountNumber>
+    <ChargeCard>
+      <ChargeCardNo>232311212312311</ChargeCardNo>
+      <ChargeCardType>VI</ChargeCardType>
+      <ChargeCardExpiryDate>1207</ChargeCardExpiryDate>
+    </ChargeCard>
+    <BillToAccountNumber>952511964</BillToAccountNumber>
+    <AWBNumber>1200002252</AWBNumber>
+    <NumberOfPieces>2</NumberOfPieces>
+    <Weight>1</Weight>
+    <WeightUnit>K</WeightUnit>
+    <GlobalProductCode>U</GlobalProductCode>
+    <DoorTo>DD</DoorTo>
+    <DimensionUnit>C</DimensionUnit>
+    <InsuredAmount>0.00</InsuredAmount>
+    <InsuredCurrencyCode>USD</InsuredCurrencyCode>
+    <Pieces />
+    <SpecialService>I</SpecialService>
+  </ShipmentDetails>
+</req:BookPickupRequestEA>
+

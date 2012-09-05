@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><res:PickupResponse xmlns:res='http://www.dhl.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation= 'http://www.dhl.com pickup-res.xsd'>
+    <Response>
+        <ServiceHeader>
+            <MessageTime>2012-06-07T09:27:02+01:00</MessageTime>
+            <MessageReference>0000000000000000PKU20110000183</MessageReference>
+            <SiteID>Dnvpssin</SiteID>
+        </ServiceHeader>
+    </Response>
+    <Note>
+        <ActionNote>Success</ActionNote>
+    </Note>
+    <ConfirmationNumber>1</ConfirmationNumber>
+    <ReadyByTime>18:00</ReadyByTime>
+    <CallInTime>18:00</CallInTime>
+    <CountryCode>IT</CountryCode></res:PickupResponse>
+

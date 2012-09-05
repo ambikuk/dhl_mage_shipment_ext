@@ -1,0 +1,171 @@
+<req:ShipmentValidateRequest xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com ship-val-req.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-10T18:53:37-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20100000810</MessageReference>
+      <SiteID>Site_ID</SiteID>
+      <Password>Password</Password>
+    </ServiceHeader>
+  </Request>
+  <RequestedPickupTime>Y</RequestedPickupTime>
+  <NewShipper>Y</NewShipper>
+  <LanguageCode>en</LanguageCode>
+  <PiecesEnabled>Y</PiecesEnabled>
+  <Billing>
+    <ShipperAccountNumber>962730810</ShipperAccountNumber>
+    <ShippingPaymentType>S</ShippingPaymentType>
+    <BillingAccountNumber>962730810</BillingAccountNumber>
+    <DutyPaymentType>S</DutyPaymentType>
+    <DutyAccountNumber>962730810</DutyAccountNumber>
+  </Billing>
+  <Consignee>
+    <CompanyName>DNVPS Houston</CompanyName>
+    <AddressLine>318 North 16th Street  La Port</AddressLine>
+    <AddressLine>e, Texas 77571  USA</AddressLine>
+    <City>Houston   </City>
+    <PostalCode>77571</PostalCode>
+    <CountryCode>US</CountryCode>
+    <CountryName>US</CountryName>
+    <Contact>
+      <PersonName>Technical Department</PersonName>
+      <PhoneNumber>1.281470103</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>1.2814701035</FaxNumber>
+      <Telex>911</Telex>
+      <Email>
+        <From>test@dhl.com</From>
+        <To>test1@dhl.com</To>
+        <cc>String</cc>
+        <Subject>Shipment Alert</Subject>
+        <ReplyTo>String</ReplyTo>
+        <Body>A Shipment has been sent to you</Body>
+      </Email>
+    </Contact>
+  </Consignee>
+  <Commodity>
+    <CommodityCode>1</CommodityCode>
+    <CommodityName>NA</CommodityName>
+  </Commodity>
+  <Dutiable>
+    <DeclaredValue>3.00</DeclaredValue>
+    <DeclaredCurrency>USD</DeclaredCurrency>
+    <ScheduleB>123456</ScheduleB>
+    <ExportLicense>D123456</ExportLicense>
+    <ShipperEIN>123456789</ShipperEIN>
+    <ShipperIDType>S</ShipperIDType>
+    <ImportLicense>D23555</ImportLicense>
+    <ConsigneeEIN>NA</ConsigneeEIN>
+    <TermsOfTrade>DDP</TermsOfTrade>
+  </Dutiable>
+  <ExportDeclaration>
+    <InterConsignee>String</InterConsignee>
+    <IsPartiesRelation>N</IsPartiesRelation>
+    <ECCN>EAR99</ECCN>
+    <SignatureName>String</SignatureName>
+    <SignatureTitle>String</SignatureTitle>
+    <ExportReason>S</ExportReason>
+    <ExportReasonCode>P</ExportReasonCode>
+    <SedNumber>FTSR</SedNumber>
+    <SedNumberType>F</SedNumberType>
+    <MxStateCode>St</MxStateCode>
+    <ExportLineItem>
+      <LineNumber>200</LineNumber>
+      <Quantity>32</Quantity>
+      <QuantityUnit>String</QuantityUnit>
+      <Description>String</Description>
+      <Value>200</Value>
+      <IsDomestic>Y</IsDomestic>
+      <ScheduleB>3002905110</ScheduleB>
+      <ECCN>EAR99</ECCN>
+      <Weight>
+        <Weight>0.5</Weight>
+        <WeightUnit>L</WeightUnit>
+      </Weight>
+      <License>
+        <LicenseNumber>D123456</LicenseNumber>
+        <ExpiryDate>2120-08-10</ExpiryDate>
+      </License>
+      <LicenseSymbol>String</LicenseSymbol>
+    </ExportLineItem>
+  </ExportDeclaration>
+  <Reference>
+    <ReferenceID>AL FARABI</ReferenceID>
+    <ReferenceType>St</ReferenceType>
+  </Reference>
+  <ShipmentDetails>
+    <NumberOfPieces>3</NumberOfPieces>
+    <Pieces>
+      <Piece>
+        <PieceID>NA</PieceID>
+        <PackageType>EE</PackageType>
+        <Weight>1</Weight>
+        <DimWeight>1000.0</DimWeight>
+        <Width>1</Width>
+        <Height>1</Height>
+        <Depth>1</Depth>
+      </Piece>
+      <Piece>
+        <PieceID>NA</PieceID>
+        <PackageType>EE</PackageType>
+        <Weight>1</Weight>
+        <DimWeight>1000.0</DimWeight>
+        <Width>1</Width>
+        <Height>1</Height>
+        <Depth>1</Depth>
+      </Piece>
+      <Piece>
+        <PieceID>NA</PieceID>
+        <PackageType>EE</PackageType>
+        <Weight>1</Weight>
+        <DimWeight>1000.0</DimWeight>
+        <Width>1</Width>
+        <Height>1</Height>
+        <Depth>1</Depth>
+      </Piece>
+    </Pieces>
+    <Weight>3</Weight>
+    <WeightUnit>L</WeightUnit>
+    <ProductCode>P</ProductCode>
+    <GlobalProductCode>P</GlobalProductCode>
+    <LocalProductCode>P</LocalProductCode>
+    <Date>2012-06-10</Date>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+    <DoorTo>DD</DoorTo>
+    <DimensionUnit>C</DimensionUnit>
+    <InsuredAmount>3.21</InsuredAmount>
+    <PackageType>EE</PackageType>
+    <IsDutiable>Y</IsDutiable>
+    <CurrencyCode>USD</CurrencyCode>
+  </ShipmentDetails>
+  <Shipper>
+    <ShipperID>962730810</ShipperID>
+    <CompanyName>Testing                           </CompanyName>
+    <RegisteredAccount>962730810</RegisteredAccount>
+    <AddressLine>Testing                           </AddressLine>
+    <AddressLine>
+    </AddressLine>
+    <City>NEW YORK CITY-BANKS</City>
+    <Division>NA</Division>
+    <DivisionCode>NA</DivisionCode>
+    <PostalCode>10001</PostalCode>
+    <CountryCode>US</CountryCode>
+    <CountryName>US</CountryName>
+    <Contact>
+      <PersonName>Testing                           </PersonName>
+      <PhoneNumber>9035437004</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>123123123</FaxNumber>
+      <Telex>911</Telex>
+      <Email>
+        <From>test2@dhl.com</From>
+        <To>test3@DHL.COM</To>
+        <cc />
+        <cc />
+        <Subject>Shipment Alert</Subject>
+        <ReplyTo />
+        <Body>Your Shipment has been sent out</Body>
+      </Email>
+    </Contact>
+  </Shipper>
+  <EProcShip>N</EProcShip>
+</req:ShipmentValidateRequest>

@@ -1,0 +1,68 @@
+<req:BookPickupRequest xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com book-pickup-req.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-13T18:53:36-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20100000810</MessageReference>
+      <SiteID>Site_ID</SiteID>
+      <Password>Pasword</Password>
+    </ServiceHeader>
+  </Request>
+  <Requestor>
+    <AccountType>D</AccountType>
+    <AccountNumber>962730810</AccountNumber>
+    <RequestorContact>
+      <PersonName>Testing                           </PersonName>
+      <Phone>9035437004</Phone>
+      <PhoneExtention>65</PhoneExtention>
+    </RequestorContact>
+  </Requestor>
+  <Place>
+    <LocationType>B</LocationType>
+    <CompanyName>Testing                           </CompanyName>
+    <Address1>Testing                           </Address1>
+    <Address2>                                  -</Address2>
+    <PackageLocation>NA</PackageLocation>
+    <City>NEW YORK CITY-BANKS</City>
+    <StateCode>NA</StateCode>
+    <DivisionName>
+    </DivisionName>
+    <CountryCode>US</CountryCode>
+    <PostalCode>10001</PostalCode>
+  </Place>
+  <Pickup>
+    <PickupDate>2012-06-13</PickupDate>
+    <ReadyByTime>15:00</ReadyByTime>
+    <CloseTime>18:00</CloseTime>
+    <Pieces>3</Pieces>
+    <weight>
+      <Weight>1</Weight>
+      <WeightUnit>K</WeightUnit>
+    </weight>
+  </Pickup>
+  <PickupContact>
+    <PersonName>Testing                           </PersonName>
+    <Phone>9035437004               </Phone>
+    <PhoneExtention>5768</PhoneExtention>
+  </PickupContact>
+  <ShipmentDetails>
+    <AccountType>D</AccountType>
+    <AccountNumber>962730810</AccountNumber>
+    <BillToAccountNumber>962730810</BillToAccountNumber>
+    <AWBNumber>1100005830</AWBNumber>
+    <NumberOfPieces>3</NumberOfPieces>
+    <Weight>1</Weight>
+    <WeightUnit>K</WeightUnit>
+    <GlobalProductCode>P</GlobalProductCode>
+    <DoorTo>DD</DoorTo>
+    <DimensionUnit>C</DimensionUnit>
+    <InsuredAmount>0.00</InsuredAmount>
+    <InsuredCurrencyCode>USD</InsuredCurrencyCode>
+    <Pieces>
+      <Weight>1</Weight>
+      <Width>1</Width>
+      <Height>1</Height>
+      <Depth>1</Depth>
+    </Pieces>
+    <SpecialService>S</SpecialService>
+  </ShipmentDetails>
+</req:BookPickupRequest>

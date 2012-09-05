@@ -1,0 +1,66 @@
+<req:BookPickupRequestAP xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com book-pickup-req.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-16T09:50:42-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20110000262</MessageReference>
+      <SiteID>Site_ID</SiteID>
+      <Password>Password</Password>
+    </ServiceHeader>
+  </Request>
+  <Requestor>
+    <AccountType>D</AccountType>
+    <AccountNumber>952511964</AccountNumber>
+    <RequestorContact>
+      <PersonName>LSL                               </PersonName>
+      <Phone>68876061</Phone>
+      <PhoneExtension>65</PhoneExtension>
+    </RequestorContact>
+  </Requestor>
+  <Place>
+    <LocationType>B</LocationType>
+    <CompanyName>GRIEG STAR SHIPPING (CANADA) LTD  </CompanyName>
+    <Address1>9TH FLOOR 1111 WEST HASTINGS S</Address1>
+    <Address2>TREET</Address2>
+    <PackageLocation>NA</PackageLocation>
+    <City>ST DENIS</City>
+    <DivisionName>
+    </DivisionName>
+    <CountryCode>RE</CountryCode>
+    <PostalCode>97400</PostalCode>
+  </Place>
+  <Pickup>
+    <PickupDate>2012-06-16</PickupDate>
+    <ReadyByTime>09:00</ReadyByTime>
+    <CloseTime>18:00</CloseTime>
+    <Pieces>1</Pieces>
+    <weight>
+      <Weight>1</Weight>
+      <WeightUnit>K</WeightUnit>
+    </weight>
+  </Pickup>
+  <PickupContact>
+    <PersonName>TEST DO NOT ARRANGE PICKUP        </PersonName>
+    <Phone>6046850242</Phone>
+    <PhoneExtension>NA</PhoneExtension>
+  </PickupContact>
+  <ShipmentDetails>
+    <AccountType>D</AccountType>
+    <AccountNumber>952511964</AccountNumber>
+    <BillToAccountNumber>952511964</BillToAccountNumber>
+    <AWBNumber>1000007326</AWBNumber>
+    <NumberOfPieces>1</NumberOfPieces>
+    <Weight>1</Weight>
+    <WeightUnit>K</WeightUnit>
+    <GlobalProductCode>P</GlobalProductCode>
+    <DoorTo>DD</DoorTo>
+    <DimensionUnit>C</DimensionUnit>
+    <InsuredAmount>0.00</InsuredAmount>
+    <InsuredCurrencyCode>USD</InsuredCurrencyCode>
+    <Pieces>
+      <Weight>1</Weight>
+      <Width>8</Width>
+      <Height>22</Height>
+      <Depth>12</Depth>
+    </Pieces>
+  </ShipmentDetails>
+</req:BookPickupRequestAP>

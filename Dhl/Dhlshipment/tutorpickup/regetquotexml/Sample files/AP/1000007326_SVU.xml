@@ -1,0 +1,110 @@
+<req:ShipmentValidateRequestAP xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com ship-val-req_AP.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-16T09:50:42-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20110000262</MessageReference>
+      <SiteID>Site_ID</SiteID>
+      <Password>Password</Password>
+    </ServiceHeader>
+  </Request>
+  <LanguageCode>en</LanguageCode>
+  <PiecesEnabled>Y</PiecesEnabled>
+  <Billing>
+    <ShipperAccountNumber>952511964</ShipperAccountNumber>
+    <ShippingPaymentType>S</ShippingPaymentType>
+    <BillingAccountNumber>952511964</BillingAccountNumber>
+    <DutyPaymentType>S</DutyPaymentType>
+  </Billing>
+  <Consignee>
+    <CompanyName>DNVPS Oslo</CompanyName>
+    <AddressLine>Veritasveien 1 N-1363 Hovik Norway</AddressLine>
+    <AddressLine>
+    </AddressLine>
+    <City>Oslo</City>
+    <DivisionCode>NA</DivisionCode>
+    <PostalCode>1363</PostalCode>
+    <CountryCode>NO</CountryCode>
+    <CountryName>NO</CountryName>
+    <Contact>
+      <PersonName>Technical Department</PersonName>
+      <PhoneNumber>47.67579900</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>47.67579393</FaxNumber>
+      <Telex>911</Telex>
+      <Email>
+        <From>test@dhl.com</From>
+        <To>test1@dhl.com</To>
+        <cc />
+        <cc />
+        <Subject>Shipment Alert</Subject>
+        <ReplyTo />
+        <Body>A Shipment has been sent to you</Body>
+      </Email>
+    </Contact>
+  </Consignee>
+  <Commodity>
+    <CommodityCode>1</CommodityCode>
+    <CommodityName>String</CommodityName>
+  </Commodity>
+  <Dutiable>
+    <DeclaredValue>1.00</DeclaredValue>
+    <DeclaredCurrency>USD</DeclaredCurrency>
+    <ShipperEIN />
+    <TermsOfTrade>DDP</TermsOfTrade>
+  </Dutiable>
+  <Reference>
+    <ReferenceID>EDF GDF SERVICES CORSES</ReferenceID>
+    <ReferenceType>st</ReferenceType>
+  </Reference>
+  <ShipmentDetails>
+    <NumberOfPieces>1</NumberOfPieces>
+    <CurrencyCode>USD</CurrencyCode>
+    <Pieces>
+      <Piece>
+        <Weight>1</Weight>
+        <Depth>12</Depth>
+        <Width>8</Width>
+        <Height>22</Height>
+      </Piece>
+    </Pieces>
+    <PackageType>OD</PackageType>
+    <Weight>1</Weight>
+    <DimensionUnit>C</DimensionUnit>
+    <WeightUnit>K</WeightUnit>
+    <GlobalProductCode>P</GlobalProductCode>
+    <LocalProductCode>P</LocalProductCode>
+    <DoorTo>DD</DoorTo>
+    <Date>2012-06-16</Date>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+    <IsDutiable>Y</IsDutiable>
+    <InsuredAmount>1.00</InsuredAmount>
+  </ShipmentDetails>
+  <Shipper>
+    <ShipperID>952511964</ShipperID>
+    <CompanyName>GRIEG STAR SHIPPING (CANADA) LTD  </CompanyName>
+    <AddressLine>9TH FLOOR 1111 WEST HASTINGS S</AddressLine>
+    <AddressLine>TREET</AddressLine>
+    <City>ST DENIS</City>
+    <DivisionCode>NA</DivisionCode>
+    <PostalCode>97400</PostalCode>
+    <CountryCode>RE</CountryCode>
+    <CountryName>RE</CountryName>
+    <Contact>
+      <PersonName>TEST DO NOT ARRANGE PICKUP        </PersonName>
+      <PhoneNumber>6046850242</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>123123123</FaxNumber>
+      <Telex>911</Telex>
+      <Email>
+        <From>test2@dhl.com</From>
+        <To>test3@DHL.COM</To>
+        <cc />
+        <cc />
+        <Subject>Shipment Alert</Subject>
+        <ReplyTo />
+        <Body>Your Shipment has been sent out</Body>
+      </Email>
+    </Contact>
+  </Shipper>
+  <EProcShip>N</EProcShip>
+</req:ShipmentValidateRequestAP>

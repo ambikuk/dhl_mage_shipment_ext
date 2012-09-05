@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><res:ShipmentValidateResponse xmlns:res='http://www.dhl.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation= 'http://www.dhl.com ship-val-res.xsd'>
+    <Response>
+        <ServiceHeader>
+            <MessageTime>2012-06-07T09:25:30+01:00</MessageTime>
+            <MessageReference>0000000000000000PKU20110000262</MessageReference>
+            <SiteID>Dnvpssin</SiteID>
+        </ServiceHeader>
+    </Response>
+    <Note>
+        <ActionNote>Success</ActionNote>
+    </Note>
+    <AirwayBillNumber>7992426481</AirwayBillNumber>
+    <BillingCode>DSA</BillingCode>
+    <CurrencyCode>USD</CurrencyCode>
+    <CourierMessage>Bunker Fuel Sample IATA SP A3</CourierMessage>
+    <DestinationServiceArea>
+        <ServiceAreaCode>OSL</ServiceAreaCode>
+        <FacilityCode/>
+        <InboundSortCode/>
+    </DestinationServiceArea>
+    <OriginServiceArea>
+        <ServiceAreaCode>RUN</ServiceAreaCode>
+        <OutboundSortCode/>
+    </OriginServiceArea>
+    <Rated>N</Rated>
+    <InsuredAmount>1.00</InsuredAmount>
+    <WeightUnit>K</WeightUnit>
+    <ChargeableWeight>1</ChargeableWeight>
+    <DimensionalWeight>0.4</DimensionalWeight>
+    <CountryCode>RE</CountryCode>
+    <Barcodes>
+        <AWBBarCode>iVBORw0KGgoAAAANSUhEUgAAAYwAAABeAQMAAAAKdrGZAAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42mNkYGBIyL8w5a95xqnw8lTmLbs1xOa2TblyVHdZemKqjpsGw8quqM9qb5dNNBNzvTdfaQEDAxMDyWBUy6iWUS2jWka1jGoZ1TKqZVTLqJZRLaNaRrWMahnVMqplVMuoFlIBADazFbzKzTiaAAAAAElFTkSuQmCC</AWBBarCode>
+        <OriginDestnBarcode>iVBORw0KGgoAAAANSUhEUgAAATUAAABeAQMAAAB4lRFqAAAABlBMVEX///8AAABVwtN+AAAAVklEQVR42mNmYGBImG/x5OyXPvvtyZ59k9mXRU5m/3SW8/bkJ+9OTi7vjZ1v8fAFAwMTA3FgVN2oulF1o+pG1Y2qG1U3qm5U3ai6UXWj6kbVjaqjhjoA+gwT8EqZbrkAAAAASUVORK5CYII=</OriginDestnBarcode>
+        <DHLRoutingBarCode>iVBORw0KGgoAAAANSUhEUgAAAawAAABeAQMAAABFK7JJAAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42u3LKxJAYABG0Y+gyZpR/GuQFcsgSoKGZAuSGYVkUYqmyR6BPUjCPf1Ykiq3Wb1i6q/UxP5tlETZUJxbp60NDyvQs+RyRsmr91JznQSSrU9oNBqNRqPRaDQajUaj0Wg02r/bC2hEFLzkCycjAAAAAElFTkSuQmCC</DHLRoutingBarCode>
+    </Barcodes>
+    <Piece>1</Piece>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+    <Reference>
+        <ReferenceID>EDF GDF SERVICES CORSES</ReferenceID>
+        <ReferenceType>st</ReferenceType>
+    </Reference>
+    <Consignee>
+        <CompanyName>DNVPS Oslo</CompanyName>
+        <AddressLine>Veritasveien 1 N-1363 Hovik Norway</AddressLine>
+        <AddressLine/>
+        <City>Oslo</City>
+        <DivisionCode>NA</DivisionCode>
+        <PostalCode>1363</PostalCode>
+        <CountryCode>NO</CountryCode>
+        <CountryName>NO</CountryName>
+        <Contact>
+            <PersonName>Technical Department</PersonName>
+            <PhoneNumber>47.67579900</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>47.67579393</FaxNumber>
+            <Telex>911</Telex>
+            <Email>
+                <From>test@dhl.com</From>
+                <To>test1@dhl.com</To>
+                <Subject>Shipment Alert</Subject>
+                <Body>A Shipment has been sent to you</Body>
+            </Email>
+        </Contact>
+    </Consignee>
+    <Shipper>
+        <ShipperID>952511964</ShipperID>
+        <CompanyName>GRIEG STAR SHIPPING (CANADA) LTD  </CompanyName>
+        <AddressLine>9TH FLOOR 1111 WEST HASTINGS S</AddressLine>
+        <AddressLine>TREET</AddressLine>
+        <City>ST DENIS</City>
+        <DivisionCode>NA</DivisionCode>
+        <PostalCode>97400</PostalCode>
+        <CountryCode>RE</CountryCode>
+        <CountryName>RE</CountryName>
+        <Contact>
+            <PersonName>TEST DO NOT ARRANGE PICKUP        </PersonName>
+            <PhoneNumber>6046850242</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>123123123</FaxNumber>
+            <Telex>911</Telex>
+            <Email>
+                <From>test2@dhl.com</From>
+                <To>test3@DHL.COM</To>
+                <Subject>Shipment Alert</Subject>
+                <Body>Your Shipment has been sent out</Body>
+            </Email>
+        </Contact>
+    </Shipper>
+    <CustomerID>131297</CustomerID>
+    <ShipmentDate>2012-06-16</ShipmentDate>
+    <GlobalProductCode>P</GlobalProductCode>
+    <Billing>
+        <ShipperAccountNumber>952511964</ShipperAccountNumber>
+        <ShippingPaymentType>S</ShippingPaymentType>
+        <BillingAccountNumber>952511964</BillingAccountNumber>
+        <DutyPaymentType>S</DutyPaymentType>
+    </Billing>
+    <Dutiable>
+        <DeclaredValue>1.00</DeclaredValue>
+        <DeclaredCurrency>USD</DeclaredCurrency>
+        <TermsOfTrade>DDP</TermsOfTrade>
+    </Dutiable>
+    <DHLRoutingCode>NO1363+48000001</DHLRoutingCode>
+    <DHLRoutingDataId>2L</DHLRoutingDataId>
+    <ProductContentCode>WPX</ProductContentCode>
+    <ProductShortName>EXPRESS WORLDWIDE</ProductShortName>
+    <InternalServiceCode>C</InternalServiceCode>
+    <DeliveryDateCode/>
+    <DeliveryTimeCode/>
+    <Pieces>
+        <Piece>
+            <PieceNumber>1</PieceNumber>
+            <Depth>12.00</Depth>
+            <Width>8.00</Width>
+            <Height>22.00</Height>
+            <Weight>1.00</Weight>
+            <DimWeight>0.4</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011736606350006506</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42u3LLRJAQBiA4W8FkrJRWOMgsoMoZMVPsMloZjTBOI47KEROsc6gCe/THyUiTdit11j1yW4Dq29/WwqdWaMid02tcYc8aT44W6u4POdRxJPvOBwOh8PhcDgcDofD4XA4nD+dF+oRFbxK3Fj+AAAAAElFTkSuQmCC</LicensePlateBarCode>
+        </Piece>
+    </Pieces></res:ShipmentValidateResponse>
+

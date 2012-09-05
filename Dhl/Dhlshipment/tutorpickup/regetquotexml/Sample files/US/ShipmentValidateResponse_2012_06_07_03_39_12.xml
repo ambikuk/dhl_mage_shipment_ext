@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><res:ShipmentValidateResponse xmlns:res='http://www.dhl.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation= 'http://www.dhl.com ship-val-res.xsd'>
+    <Response>
+        <ServiceHeader>
+            <MessageTime>2012-06-07T09:39:12+01:00</MessageTime>
+            <MessageReference>0000000000000000PKU20100000810</MessageReference>
+            <SiteID>Dnvpssin</SiteID>
+        </ServiceHeader>
+    </Response>
+    <Note>
+        <ActionNote>Success</ActionNote>
+    </Note>
+    <AirwayBillNumber>7992426503</AirwayBillNumber>
+    <BillingCode>DSA</BillingCode>
+    <CurrencyCode>USD</CurrencyCode>
+    <CourierMessage>Bunker Fuel Sample IATA SP A3</CourierMessage>
+    <DestinationServiceArea>
+        <ServiceAreaCode>IAH</ServiceAreaCode>
+        <FacilityCode>NBC</FacilityCode>
+        <InboundSortCode/>
+    </DestinationServiceArea>
+    <OriginServiceArea>
+        <ServiceAreaCode>ZYP</ServiceAreaCode>
+        <OutboundSortCode/>
+    </OriginServiceArea>
+    <Rated>N</Rated>
+    <InsuredAmount>3.21</InsuredAmount>
+    <WeightUnit>L</WeightUnit>
+    <ChargeableWeight>3</ChargeableWeight>
+    <DimensionalWeight>0.0</DimensionalWeight>
+    <ReadyByTime>20:00</ReadyByTime>
+    <PickupCharge>0.00</PickupCharge>
+    <CallInTime>19:00</CallInTime>
+    <DaysAdvanceNotice>0</DaysAdvanceNotice>
+    <CountryCode>US</CountryCode>
+    <Barcodes>
+        <AWBBarCode>iVBORw0KGgoAAAANSUhEUgAAAYwAAABeAQMAAAAKdrGZAAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42mNkYGBIyL8w5a95xqnw8lTmLbs1xOa2TblyVHdZemKqjpuGmKuRw1+f2mXzzx34em++0gIGBiYGksGollEto1pGtYxqGdUyqmVUy6iWUS2jWka1jGoZ1TKqZVTLqJZRLaQCAL/hFryAW8A9AAAAAElFTkSuQmCC</AWBBarCode>
+        <OriginDestnBarcode>iVBORw0KGgoAAAANSUhEUgAAATUAAABeAQMAAAB4lRFqAAAABlBMVEX///8AAABVwtN+AAAAVklEQVR42mNkYGBIyL8w5cqJU2zpZQHMFyaaibkaeWsse/vL1idA95dwVP6FiRcYGJgYiAOj6kbVjaobVTeqblTdqLpRdaPqRtWNqhtVN6puVB011AEAOOYQvPn4PVoAAAAASUVORK5CYII=</OriginDestnBarcode>
+        <ClientIDBarCode>iVBORw0KGgoAAAANSUhEUgAAARgAAAAkAQMAAABoj7etAAAABlBMVEX///8AAABVwtN+AAAAPElEQVR42mNkYGBIyL8wZcutGwyvUp4yBMtriM295XDlxCm29MRU31ufpRgYmBgIg1E1o2pG1YyqGepqAKFJD0hDGoJfAAAAAElFTkSuQmCC</ClientIDBarCode>
+        <DHLRoutingBarCode>iVBORw0KGgoAAAANSUhEUgAAAcIAAABeAQMAAACKBYaKAAAABlBMVEX///8AAABVwtN+AAAAbklEQVR42u3LIQ5AUACH8T/b02QzwXWcQdVlprxi0xVjM07jEMqrigsIOINm+770lZ8nqQ4bF5XrcDtdtqvOe/DSot3bZM40mt4Zq6tcFFkpVzBt8xG/6+trSCQSiUQikUgkEolEIpFIJBL5N/kAYokXvEypPXIAAAAASUVORK5CYII=</DHLRoutingBarCode>
+    </Barcodes>
+    <Piece>3</Piece>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+    <Reference>
+        <ReferenceID>AL FARABI</ReferenceID>
+        <ReferenceType>St</ReferenceType>
+    </Reference>
+    <Consignee>
+        <CompanyName>DNVPS Houston</CompanyName>
+        <AddressLine>318 North 16th Street  La Port</AddressLine>
+        <AddressLine>e, Texas 77571  USA</AddressLine>
+        <City>Houston   </City>
+        <PostalCode>77571</PostalCode>
+        <CountryCode>US</CountryCode>
+        <CountryName>US</CountryName>
+        <Contact>
+            <PersonName>Technical Department</PersonName>
+            <PhoneNumber>1.281470103</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>1.2814701035</FaxNumber>
+            <Telex>911</Telex>
+            <Email>
+                <From>test@dhl.com</From>
+                <To>test1@dhl.com</To>
+                <cc>String</cc>
+                <Subject>Shipment Alert</Subject>
+                <ReplyTo>String</ReplyTo>
+                <Body>A Shipment has been sent to you</Body>
+            </Email>
+        </Contact>
+    </Consignee>
+    <Shipper>
+        <ShipperID>962730810</ShipperID>
+        <CompanyName>Testing                           </CompanyName>
+        <RegisteredAccount>962730810</RegisteredAccount>
+        <AddressLine>Testing                           </AddressLine>
+        <AddressLine/>
+        <City>NEW YORK CITY-BANKS</City>
+        <Division>NA</Division>
+        <DivisionCode>NA</DivisionCode>
+        <PostalCode>10001</PostalCode>
+        <CountryCode>US</CountryCode>
+        <CountryName>US</CountryName>
+        <Contact>
+            <PersonName>Testing                           </PersonName>
+            <PhoneNumber>9035437004</PhoneNumber>
+            <PhoneExtension>65</PhoneExtension>
+            <FaxNumber>123123123</FaxNumber>
+            <Telex>911</Telex>
+            <Email>
+                <From>test2@dhl.com</From>
+                <To>test3@DHL.COM</To>
+                <Subject>Shipment Alert</Subject>
+                <Body>Your Shipment has been sent out</Body>
+            </Email>
+        </Contact>
+    </Shipper>
+    <CustomerID>300902</CustomerID>
+    <ShipmentDate>2012-06-10</ShipmentDate>
+    <GlobalProductCode>P</GlobalProductCode>
+    <Billing>
+        <ShipperAccountNumber>962730810</ShipperAccountNumber>
+        <ShippingPaymentType>S</ShippingPaymentType>
+        <BillingAccountNumber>962730810</BillingAccountNumber>
+        <DutyPaymentType>S</DutyPaymentType>
+        <DutyAccountNumber>962730810</DutyAccountNumber>
+    </Billing>
+    <Dutiable>
+        <DeclaredValue>3.00</DeclaredValue>
+        <DeclaredCurrency>USD</DeclaredCurrency>
+        <ScheduleB>123456</ScheduleB>
+        <ExportLicense>D123456</ExportLicense>
+        <ShipperEIN>123456789</ShipperEIN>
+        <ShipperIDType>S</ShipperIDType>
+        <ImportLicense>D23555</ImportLicense>
+        <ConsigneeEIN>NA</ConsigneeEIN>
+        <TermsOfTrade>DDP</TermsOfTrade>
+    </Dutiable>
+    <ExportDeclaration>
+        <InterConsignee>String</InterConsignee>
+        <IsPartiesRelation>N</IsPartiesRelation>
+        <ECCN>EAR99</ECCN>
+        <SignatureName>String</SignatureName>
+        <SignatureTitle>String</SignatureTitle>
+        <ExportReason>S</ExportReason>
+        <ExportReasonCode>P</ExportReasonCode>
+        <SedNumber>FTSR</SedNumber>
+        <SedNumberType>F</SedNumberType>
+        <MxStateCode>St</MxStateCode>
+        <ExportLineItem>
+            <LineNumber>200</LineNumber>
+            <Quantity>32</Quantity>
+            <QuantityUnit>String</QuantityUnit>
+            <Description>String</Description>
+            <Value>200</Value>
+            <IsDomestic>Y</IsDomestic>
+            <ScheduleB>3002905110</ScheduleB>
+            <ECCN>EAR99</ECCN>
+            <Weight>
+                <Weight>0.5</Weight>
+                <WeightUnit>L</WeightUnit>
+            </Weight>
+            <License>
+                <LicenseNumber>D123456</LicenseNumber>
+                <ExpiryDate>2120-08-10</ExpiryDate>
+            </License>
+            <LicenseSymbol>String</LicenseSymbol>
+        </ExportLineItem>
+    </ExportDeclaration>
+    <NewShipper>Y</NewShipper>
+    <DHLRoutingCode>US77571+48000001</DHLRoutingCode>
+    <DHLRoutingDataId>2L</DHLRoutingDataId>
+    <ProductContentCode>WPX</ProductContentCode>
+    <ProductShortName>EXPRESS WORLDWIDE</ProductShortName>
+    <InternalServiceCode>C</InternalServiceCode>
+    <DeliveryDateCode/>
+    <DeliveryTimeCode/>
+    <Pieces>
+        <Piece>
+            <PieceNumber>1</PieceNumber>
+            <Depth>1.00</Depth>
+            <Width>1.00</Width>
+            <Height>1.00</Height>
+            <Weight>1.00</Weight>
+            <PackageType>EE</PackageType>
+            <DimWeight>0.0</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011736606350006509</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42u3LIRJAQBiA0X8FkiIKO+MgsoMoZAnBxm1mFCMYyVncQbGRU6wzaML3+lMi0sb96mwzZIeJTHKH21IlhdEq9W7stD/lyUu3G1FzfU1WJJDvOBwOh8PhcDgcDofD4XA4nD+dF+l7FbwEnUQiAAAAAElFTkSuQmCC</LicensePlateBarCode>
+        </Piece>
+        <Piece>
+            <PieceNumber>2</PieceNumber>
+            <Depth>1.00</Depth>
+            <Width>1.00</Width>
+            <Height>1.00</Height>
+            <Weight>1.00</Weight>
+            <PackageType>EE</PackageType>
+            <DimWeight>0.0</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011736606350006510</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAa0lEQVR42mNkYGCo5K2e+6CjuF7xeAN7g9ALtvkzM4TcG+QYpf4/6K+S+3+L4aVt8oMFbAkM2zPvT+pgYGBiIB2M6hnVM6pnVM+onlE9o3pG9YzqGdUzqmdUz6ieUT2jekb1jOoZ1TOY9AAA6LgVvLTWDPsAAAAASUVORK5CYII=</LicensePlateBarCode>
+        </Piece>
+        <Piece>
+            <PieceNumber>3</PieceNumber>
+            <Depth>1.00</Depth>
+            <Width>1.00</Width>
+            <Height>1.00</Height>
+            <Weight>1.00</Weight>
+            <PackageType>EE</PackageType>
+            <DimWeight>0.0</DimWeight>
+            <DataIdentifier>J</DataIdentifier>
+            <LicensePlate>JD011736606350006511</LicensePlate>
+            <LicensePlateBarCode>iVBORw0KGgoAAAANSUhEUgAAAZYAAABeAQMAAAA6+qC4AAAABlBMVEX///8AAABVwtN+AAAAaUlEQVR42u3LIRJAQBiA0X8FkiIKO6O4hewgCllCsNo2M5pgHMcdlBU5xTqDJnyvPyUiXTxsl23H7DCRSe5wX+ukNFql/pp77U95ispNuR+2xi1WJJDvOBwOh8PhcDgcDofD4XA4nD+dF9ZtFrw+3x10AAAAAElFTkSuQmCC</LicensePlateBarCode>
+        </Piece>
+    </Pieces></res:ShipmentValidateResponse>
+

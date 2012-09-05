@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><res:PickupResponse xmlns:res='http://www.dhl.com' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation= 'http://www.dhl.com pickup-res.xsd'>
+    <Response>
+        <ServiceHeader>
+            <MessageTime>2012-06-07T09:24:01+01:00</MessageTime>
+            <MessageReference>0000000000000000PKU20110000262</MessageReference>
+            <SiteID>Dnvpssin</SiteID>
+        </ServiceHeader>
+    </Response>
+    <Note>
+        <ActionNote>Success</ActionNote>
+    </Note>
+    <ConfirmationNumber>210219</ConfirmationNumber>
+    <OriginSvcArea>RUN</OriginSvcArea></res:PickupResponse>
+

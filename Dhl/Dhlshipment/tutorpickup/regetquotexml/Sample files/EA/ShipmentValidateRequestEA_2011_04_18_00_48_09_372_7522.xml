@@ -1,0 +1,115 @@
+<req:ShipmentValidateRequestEA xmlns:req="http://www.dhl.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dhl.com ship-val-req_EA.xsd">
+  <Request>
+    <ServiceHeader>
+      <MessageTime>2012-06-18T08:47:21-08:00</MessageTime>
+      <MessageReference>0000000000000000PKU20110000183</MessageReference>
+      <SiteID>Dnvpssin</SiteID>
+      <Password>kdiwn03nk9</Password>
+    </ServiceHeader>
+  </Request>
+  <NewShipper>Y</NewShipper>
+  <LanguageCode>en</LanguageCode>
+  <PiecesEnabled>Y</PiecesEnabled>
+  <Billing>
+    <ShipperAccountNumber>952511964</ShipperAccountNumber>
+    <ShippingPaymentType>S</ShippingPaymentType>
+    <BillingAccountNumber>952511964</BillingAccountNumber>
+    <DutyPaymentType>R</DutyPaymentType>
+  </Billing>
+  <Consignee>
+    <CompanyName>DNVPS Rotterdam</CompanyName>
+    <AddressLine>Zwolseweg 1, 2994 LB</AddressLine>
+    <AddressLine>Barendrecht The Netherlands</AddressLine>
+    <City>Rotterdam</City>
+    <Division>NA</Division>
+    <PostalCode>2994 LB</PostalCode>
+    <CountryCode>NL</CountryCode>
+    <CountryName>NL</CountryName>
+    <Contact>
+      <PersonName>Technical Department</PersonName>
+      <PhoneNumber>31.102922600</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>31.104797141</FaxNumber>
+      <Telex>911</Telex>
+    </Contact>
+  </Consignee>
+  <Commodity>
+    <CommodityCode>1</CommodityCode>
+    <CommodityName>String</CommodityName>
+  </Commodity>
+  <Dutiable>
+    <DeclaredValue>2.00</DeclaredValue>
+    <DeclaredCurrency>USD</DeclaredCurrency>
+    <ShipperEIN>123456789</ShipperEIN>
+    <TermsOfTrade>DDP</TermsOfTrade>
+  </Dutiable>
+  <Reference>
+    <ReferenceID>SEASENATOR</ReferenceID>
+    <ReferenceType>st</ReferenceType>
+  </Reference>
+  <ShipmentDetails>
+    <NumberOfPieces>2</NumberOfPieces>
+    <CurrencyCode>USD</CurrencyCode>
+    <Pieces>
+      <Piece>
+        <PackageType>OD</PackageType>
+        <Weight>1</Weight>
+        <Depth>12</Depth>
+        <Width>8</Width>
+        <Height>22</Height>
+      </Piece>
+      <Piece>
+        <PackageType>OD</PackageType>
+        <Weight>1</Weight>
+        <Depth>12</Depth>
+        <Width>8</Width>
+        <Height>22</Height>
+      </Piece>
+    </Pieces>
+    <PackageType>OD</PackageType>
+    <Weight>2</Weight>
+    <DimensionUnit>C</DimensionUnit>
+    <WeightUnit>K</WeightUnit>
+    <GlobalProductCode>U</GlobalProductCode>
+    <LocalProductCode>U</LocalProductCode>
+    <DoorTo>DD</DoorTo>
+    <Date>2012-06-21</Date>
+    <Contents>Bunker Fuel Sample IATA SP A3</Contents>
+  </ShipmentDetails>
+  <Shipper>
+    <ShipperID>952511964</ShipperID>
+    <CompanyName>G.PANESSA and  C.S.R.L.           </CompanyName>
+    <RegisteredAccount>952511964</RegisteredAccount>
+    <AddressLine>Steamship agents,international</AddressLine>
+    <AddressLine>freight forwarders, 11,SCALID</AddressLine>
+    <City>LIVORNO</City>
+    <Division>NA</Division>
+    <PostalCode>57121</PostalCode>
+    <CountryCode>IT</CountryCode>
+    <CountryName>IT</CountryName>
+    <Contact>
+      <PersonName>Ms Betty / Mr Riccardo            </PersonName>
+      <PhoneNumber>00390586270225</PhoneNumber>
+      <PhoneExtension>65</PhoneExtension>
+      <FaxNumber>123123123</FaxNumber>
+      <Telex>911</Telex>
+    </Contact>
+  </Shipper>
+  <SpecialService>
+    <SpecialServiceType>S</SpecialServiceType>
+    <CommunicationType>P</CommunicationType>
+    <ChargeValue>33.10</ChargeValue>
+    <CurrencyCode>USD</CurrencyCode>
+  </SpecialService>
+  <Place>
+    <ResidenceOrBusiness>B</ResidenceOrBusiness>
+    <CompanyName>G.PANESSA and  C.S.R.L.           </CompanyName>
+    <AddressLine>Steamship agents,international</AddressLine>
+    <AddressLine>freight forwarders, 11,SCALID</AddressLine>
+    <City>LIVORNO</City>
+    <CountryCode>IT</CountryCode>
+    <DivisionCode>NA</DivisionCode>
+    <Division>NA</Division>
+    <PostalCode>57121</PostalCode>
+  </Place>
+</req:ShipmentValidateRequestEA>
