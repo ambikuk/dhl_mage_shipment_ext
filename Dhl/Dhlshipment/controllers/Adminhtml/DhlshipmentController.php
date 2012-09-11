@@ -191,7 +191,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->drawText('XML PI v4.0', 314, 799, 'UTF-8');
 		$page->setFillColor(Zend_Pdf_Color_Html::color('#FFFFFF'));
 		$page->setFont($font, 15);
-		$page->drawText('ESI', 430, 805, 'UTF-8');
+		$page->drawText($xmlResponse->ProductContentCode, 425, 805, 'UTF-8');
 
 		//From
 		$page->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
@@ -227,19 +227,20 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->drawText($xmlResponse->Consignee->CountryName, 337, 670, 'UTF-8');
 
 		//colomn 4
-		$page->drawText('FRDO', 314, 640, 'UTF-8');
+		$page->drawText($xmlResponse->OriginServiceArea->OutboundSortCode, 314, 640, 'UTF-8');
 		$page->setFont($font, 13);
-		$page->drawText('FR-MRS', 410, 640, 'UTF-8');
+		$page->drawText($xmlResponse->DestinationServiceArea->ServiceAreaCode, 410, 640, 'UTF-8');
 		$page->setFont($font, 10);
-		$page->drawText('19', 520, 640, 'UTF-8');
+		$page->drawText($xmlResponse->DestinationServiceArea->InboundSortCode, 520, 640, 'UTF-8');
 
 		//colomn 5
 		$page->setFont($font, 18);
 		$page->setFillColor(Zend_Pdf_Color_Html::color('#FFFFFF'));
-		$page->drawText('DTP-NDS-C', 314, 611, 'UTF-8');
+		$page->drawText($xmlResponse->InternalServiceCode, 314, 611, 'UTF-8');
 		$page->setFillColor(Zend_Pdf_Color_Html::color('#000000'));
 		$page->setFont($font, 8);
-		$page->drawText('S', 497, 608, 'UTF-8');
+		$page->drawText($xmlResponse->DeliveryDateCode, 497, 608, 'UTF-8');
+		$page->drawText($xmlResponse->DeliveryTimeCode, 520, 608, 'UTF-8');
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
 		$page->setFont($font, 8);
 		$page->drawText('Day', 497, 618, 'UTF-8');
@@ -270,26 +271,35 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 
 
 		$barcode_binary = base64_decode($xmlResponse->Barcodes->AWBBarCode);
-		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($tmp_file, $barcode_binary);
-		$png_file = $tmp_file . '.png';
-		rename($tmp_file, $png_file);
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir).'.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
 		$image = Zend_Pdf_Image::imageWithPath($png_file);
 		$page->drawImage($image, 320, 500, 480, 550);
 
+//pak ivan		
 		$barcode_binary = base64_decode($xmlResponse->Barcodes->OriginDestnBarcode);
-		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($tmp_file, $barcode_binary);
-		$png_file = $tmp_file . '.png';
-		rename($tmp_file, $png_file);
+		// Temporary dir
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir).'.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
 		$image = Zend_Pdf_Image::imageWithPath($png_file);
 		$page->drawImage($image, 320, 440, 520, 490);
 
+	
 		$barcode_binary = base64_decode($xmlResponse->Barcodes->DHLRoutingBarCode);
-		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($tmp_file, $barcode_binary);
-		$png_file = $tmp_file . '.png';
-		rename($tmp_file, $png_file);
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir).'.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
 		$image = Zend_Pdf_Image::imageWithPath($png_file);
 		$page->drawImage($image, 320, 380, 520, 430);
 

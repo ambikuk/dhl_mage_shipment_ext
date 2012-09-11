@@ -119,10 +119,11 @@ class CDhlToolKit
 	public function render($response, $config = array())
 	{
 		$xml = simplexml_load_string($response);
-		$error = $xml->ConditionData;
-		if ($error != '')
+		$error = $xml->GetQuoteResponse->Note->Condition->ConditionData;
+//		var_dump($error);exit;
+		if ($xml->GetQuoteResponse->Note->Condition->ConditionData)
 		{
-			//tulis error maneh
+			return array('message'=>$xml->GetQuoteResponse->Note->Condition->ConditionData,'status'=>error);
 		}
 		else
 		{

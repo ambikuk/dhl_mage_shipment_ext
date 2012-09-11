@@ -179,5 +179,103 @@ class Dhl_Dhlshipment_Model_Carrier_Dhlshipment extends Dhl_Dhlshipment_Model_Ca
 			return $codes[$type][$code];
 		}
 	}
+public function getGenerateAwb()
+	{
+		if (isset($_POST['b-submit']) || isset($_GET['tracking']))
+		{
+			if (isset($_POST['b-submit']))
+				$awb = $_POST['awb'];
+			else if (isset($_GET['tracking']))
+				$awb = $_GET['tracking'];
 
+			$xml = '<?xml version="1.0" encoding="UTF-8"?>
+<req:KnownTrackingRequest xmlns:req="http://www.dhl.com" 
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+						xsi:schemaLocation="http://www.dhl.com
+						TrackingRequestKnown.xsd">
+	<Request>
+		<ServiceHeader>
+			<MessageTime>'.$this->time.'</MessageTime>
+			<MessageReference>'.$this->mref.'</MessageReference>
+        <SiteID>' . $this->getConfigXml("id") . '</SiteID>
+        <Password>' . $this->getConfigXml("password") . '</Password>
+		</ServiceHeader>
+	</Request>
+	<LanguageCode>en</LanguageCode>
+	<AWBNumber>' . $awb . '</AWBNumber>
+	<LevelOfDetails>ALL_CHECK_POINTS</LevelOfDetails>
+</req:KnownTrackingRequest>
+			 ';
+//			var_dump($xml);exit;
+			$results = $this->sendXmlOverPost($xml);
+			$xml = simplexml_load_string($results);
+//			var_dump($xml);exit;
+			echo "Number : " . $xml->AWBInfo->AWBNumber.'<br />';
+			echo "Origin Service Area : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->ServiceAreaCode.'<br />';
+			echo "Description : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->Description.'<br />';
+			echo "Destination Service Area : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->ServiceAreaCode.'<br />';
+			echo "Description : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->Description.'<br />';
+			echo "Shipper Name : " . $xml->AWBInfo->ShipmentInfo->ShipperName.'<br />';
+			echo "Consignee Name : " . $xml->AWBInfo->ShipmentInfo->ConsigneeName.'<br />';
+			echo "Shipment Date : " . $xml->AWBInfo->ShipmentInfo->ShipmentDate.'<br />';
+			echo "Pieces : " . $xml->AWBInfo->ShipmentInfo->Pieces.'<br />';
+			echo "Weight : " . $xml->AWBInfo->ShipmentInfo->Weight.'<br />';
+			echo "Weight Unit : " . $xml->AWBInfo->ShipmentInfo->WeightUnit.'<br />';
+			echo "Global Product Code : " . $xml->AWBInfo->ShipmentInfo->GlobalProductCode.'<br />';
+			echo "Shipment Desc : " . $xml->AWBInfo->ShipmentInfo->ShipmentDesc.'<br />';
+			echo "Notifucation Flag : " . $xml->AWBInfo->ShipmentInfo->DlvyNotificationFlag.'<br />';
+			echo "From : " . $xml->AWBInfo->ShipmentInfo->Shipper->City.' '.$xml->ShipmentInfo->Shipper->Postalcode.' '.$xml->ShipmentInfo->Shipper->CountryCode.'<br />';
+			echo "To : " . $xml->AWBInfo->ShipmentInfo->Consignee->City.' '.$xml->ShipmentInfo->Consignee->Postalcode.' '.$xml->ShipmentInfo->Consignee->CountryCode.'<br />';
+			foreach ($xml->AWBInfo->Status as $stat)
+			{
+				echo "<br />ActionStatus : " . $stat->ActionStatus;
+				foreach ($stat->Condition as $con)
+				{
+					echo "<br />ConditionCode : " . $con->ConditionCode;
+					echo "<br />ConditionData : " . $con->ConditionData;
+				}
+			}
+			echo '<table cellspacing="5" cellpadding="5" class="tbltrackingawb">';
+			echo '
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Event Code</th>
+								<th>Service Event</th>
+							</tr>
+					   ';
+			foreach ($xml->AWBInfo->ShipmentInfo->ShipmentEvent as $event)
+			{
+				echo '
+							<tr>
+								<td>' . $event->Date . '</td>
+								<td>' . $event->Time . '</td>
+								<td>' . $event->ServiceEvent->EventCode . '</td>
+								<td>' . $event->ServiceEvent->Description . '</td>
+							</tr>
+					   ';
+
+				$event->Date;
+			}
+			echo '</table>';
+		}
+		else
+		{
+			echo "please check your awb";
+		}
+	}
+
+	public function sendXmlOverPost($xml)
+	{
+//		var_dump($xml);exit;
+		$getUrl = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
+		$client = new Zend_Http_Client();
+		$client->setUri($getUrl->getConfigXml('gateway_url'));
+		$response = $client->setRawData($xml, 'text/xml')->request('POST');
+		if ($response->isSuccessful())
+		{
+//			var_dump($response->getBody());exit;
+			return $response->getBody();
+		}
+	}
 }

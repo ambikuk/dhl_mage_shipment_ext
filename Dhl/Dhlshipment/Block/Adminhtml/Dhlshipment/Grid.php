@@ -24,6 +24,8 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 		$collection = Mage::getModel('dhlshipment/dhlshipment')->getCollection();
 		$collection->getSelect()->join(
 				array('order' => 'sales_flat_order_grid'), 'main_table.order_id=order.increment_id', array('order.*'));
+		$collection->getSelect()->join(
+				array('order2' => 'sales_flat_order'), 'main_table.order_id=order2.increment_id AND order2.shipping_description LIKE "%dhl%"', array('order2.*'));
 		$this->setCollection($collection);
 		return parent::_prepareCollection();
 	}
@@ -35,6 +37,12 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 //			'align' => 'right',
 //			'width' => '50px',
 //			'index' => 'id',
+//		));
+//		$this->addColumn('shipping_description', array(
+//			'header' => Mage::helper('sales')->__('Order #'),
+//			'width' => '80px',
+//			'type' => 'text',
+//			'index' => 'shipping_description',
 //		));
 		$this->addColumn('real_order_id', array(
 			'header' => Mage::helper('sales')->__('Order #'),

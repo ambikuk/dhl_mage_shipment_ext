@@ -127,6 +127,7 @@
 				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
 				<infotext></infotext>
 				<handling_type>F</handling_type>
+				<global_product_code>P</global_product_code>
 				
 				<!--				pickup-->
 				<account_type>D</account_type>
@@ -146,7 +147,8 @@
 				<gateway_url>https://xmlpi-ea.dhl.com/XMLShippingServlet</gateway_url>
 				<id>APMediaM9</id>
 				<password>apwoEM27X</password>
-				<payment_account_number>967080215</payment_account_number>
+				<payment_account_number>540293320</payment_account_number>
+				<inbound>967080215</inbound>
 				<payment_country>ID</payment_country>
 				<ready_time_gmt>+08:00</ready_time_gmt>
 				<weight_unit>KG</weight_unit>

@@ -57,6 +57,8 @@ class Dhl_Dhlshipment_Model_Order_Observer
 
 	public function export_new_order($observer)
 	{
+//		var_dump($observer->getEvent()->getOrder());exit;
+
 		$incrementid = $observer->getEvent()->getOrder()->getIncrementId();
 		$model = Mage::getModel("dhlshipment/dhlshipment");
 		$model->setStatus("1");
@@ -599,11 +601,13 @@ class Dhl_Dhlshipment_Model_Order_Observer
 		$this->conTelp = $address->telephone;
 		$this->conEmailFrom = $address->email;
 		$this->conEmailTo = $address->email;
+
 		$this->pieceWeight = $weight;
 		$this->totalWeight = $weight;
 		$this->globalproductcode;
 		$this->localproductcode;
 		$this->timeNow;
+
 		$this->oriStoreName = $store->getName();
 		$this->oriStreetLine1 = $originSetting["origin"]["street_line1"];
 		$this->oriStreetLine2 = $originSetting["origin"]["street_line2"];
@@ -620,6 +624,32 @@ class Dhl_Dhlshipment_Model_Order_Observer
 		{
 			$this->shippingPaymentType = 'R';
 			$this->dutyPaymentType = 'R';
+
+			$this->oriStoreName = $address->firstname . ' ' . $address->lastname;
+			$this->oriStreetLine1 = $addressLine[0];
+			$this->oriStreetLine2 = $addressLine[1];
+			$this->oriCity = $address->city;
+			$this->oriRegionId = $this->getRegion($address->region);
+			$this->oriPostcode = $address->postcode;
+			$this->oriCountryId = $address->country_id;
+			$this->oriCountry = $this->getCountry($address->country_id);
+			$this->oriOwnerName = $address->firstname . ' ' . $address->lastname;
+			$this->oriPhone = $address->telephone;
+			$this->oriEmailFrom = $address->email;
+			$this->oriEmailTo = $address->email;
+
+			$this->conFullname = $store->getName();
+			$this->conAddressLine1 = $originSetting["origin"]["street_line1"];
+			$this->conAddressLine2 = $originSetting["origin"]["street_line2"];
+			$this->conCity = $originSetting["origin"]["city"];
+			$this->conRegion = $originSetting["origin"]["region_id"];
+			$this->conPostcode = $originSetting["origin"]["postcode"];
+			$this->conCountryId = $originSetting["origin"]["country_id"];
+			$this->conCountry = $this->getCountry($originSetting["origin"]["country_id"]);
+			$this->conPersonName = $storeOwnerName;
+			$this->conTelp = $storePhone;
+			$this->conEmailFrom = $storeEmail;
+			$this->conEmailTo = $storeEmail;
 		}
 		elseif ($type == 'tracking')
 		{
@@ -641,25 +671,28 @@ class Dhl_Dhlshipment_Model_Order_Observer
 		$this->dimesionUnit = $getXml->getConfigXml('dimension_unit');
 		$this->globalProductCode = $getXml->getConfigXml('global_product_code');
 		$this->weightUnit = $getXml->getConfigXml('weight_unit');
+		$this->billingAccountNumber = $this->paymentAccountNumber;
+		$this->contentMessage = $getXml->getConfigXml('infotext');
+
 		if ($this->xmlRequestType == 'shipmentvalidation' || $this->xmlRequestType == 'bookingpickup')
 		{
-			if ($getXml->getConfigXml('outbound') > 0)
-				$this->paymentAccountNumber = $getXml->getConfigXml('outbound');
-		}
-		if ($this->xmlRequestType == 'shipmentvalidation')
-		{
-			if ($getXml->getConfigXml('duty_account_number') > 0)
-			{
-				$this->dutyAccountNumber = '<DutyAccountNumber>' . $getXml->getConfigXml('duty_account_number') . '</DutyAccountNumber>';
-				$this->dutyPaymentType = 'T';
-				}
-			if ($getXml->getConfigXml('inbound') !== '' || $getXml->getConfigXml('inbound') !== NULL)
-				$this->paymentAccountNumber = $getXml->getConfigXml('inbound');
+//			if ($getXml->getConfigXml('outbound') > 0)
+//				$this->paymentAccountNumber = $getXml->getConfigXml('outbound');
 		}
 		if ($this->xmlRequestType == 'shipmentvalidation' || $this->xmlRequestType == 'return')
 		{
-			if ($getXml->getConfigXml('payer') !== '' || $getXml->getConfigXml('payer') !== null)
-				$this->payer = '<BillingAccountNumber>' . $getXml->getConfigXml('payer') . '</BillingAccountNumber>';
+//			if ($getXml->getConfigXml('payer') > 0)
+//				$this->payer = '<BillingAccountNumber>' . $getXml->getConfigXml('payer') . '</BillingAccountNumber>';
+//			if ($getXml->getConfigXml('duty_account_number') > 0)
+//			{
+//				$this->dutyAccountNumber = '<DutyAccountNumber>' . $getXml->getConfigXml('duty_account_number') . '</DutyAccountNumber>';
+//				$this->dutyPaymentType = 'T';
+//			}
+		}
+		if ($type == 'return')
+		{
+			if ($getXml->getConfigXml('inbound') > 0)
+				$this->paymentAccountNumber = $getXml->getConfigXml('inbound');
 		}
 		return $this;
 	}
@@ -843,10 +876,9 @@ class Dhl_Dhlshipment_Model_Order_Observer
 		<PiecesEnabled>Y</PiecesEnabled>
 		<Billing>
 			<ShipperAccountNumber>$this->paymentAccountNumber</ShipperAccountNumber>
-			<ShippingPaymentType>$this->shippingPaymentType</ShippingPaymentType>
-			$this->payer 
+			<ShippingPaymentType>$this->shippingPaymentType</ShippingPaymentType>	
+			<BillingAccountNumber>$this->paymentAccountNumber</BillingAccountNumber>
 			<DutyPaymentType>$this->dutyPaymentType</DutyPaymentType>
-			$this->dutyAccountNumber
 		</Billing>
 		<Consignee>
 			<CompanyName>$this->conFullname</CompanyName>
@@ -904,7 +936,7 @@ class Dhl_Dhlshipment_Model_Order_Observer
 			<LocalProductCode>$this->localproductcode</LocalProductCode>
 			<DoorTo>DD</DoorTo>
 			<Date>$this->timeNow</Date>
-			<Contents>For testing purpose only. Please do not ship</Contents>
+			<Contents>$this->contentMessage</Contents>
 			<IsDutiable>Y</IsDutiable>
 			<InsuredAmount>3000.10</InsuredAmount>
 		</ShipmentDetails>
@@ -914,7 +946,6 @@ class Dhl_Dhlshipment_Model_Order_Observer
 			<AddressLine>$this->oriStreetLine1</AddressLine>
 			<AddressLine>$this->oriStreetLine2</AddressLine>
 			<City>$this->oriCity</City>
-			<DivisionCode>$this->oriRegionId</DivisionCode>
 			<PostalCode>$this->oriPostcode</PostalCode>
 			<CountryCode>$this->oriCountryId</CountryCode>
 			<CountryName>$this->oriCountry</CountryName>
@@ -1137,8 +1168,18 @@ SCRIPT;
 		{
 			$this->xmlResponse = $response->getBody();
 		}
-		var_dump($this);exit;
-		return $this;
+
+		$xmlResponse = simplexml_load_string($this->xmlResponse);
+
+		if ($xmlResponse->Note->ActionNote == 'Success')
+		{
+			return $this;
+		}
+		else
+		{
+			echo $xmlResponse->Response->Status->Condition->ConditionData;
+			exit;
+		}
 	}
 
 	public function getResponse()

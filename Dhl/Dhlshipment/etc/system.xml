@@ -245,7 +245,7 @@
 							<show_in_store>1</show_in_store>
 						</specificerrmsg>
 						<infotext translate="label">
-							<label>Info Text (supports HTML)</label>
+							<label>Info Text</label>
 							<frontend_type>editor</frontend_type>
 							<sort_order>90</sort_order>
 							<show_in_default>1</show_in_default>
@@ -270,14 +270,14 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
 						</credit_memo_return>
-						<outbound translate="label">
+<!--						<outbound translate="label">
 							<label>Outbound account number</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>179</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</outbound>
+						</outbound>-->
 						<inbound translate="label">
 							<label>Inbound account number</label>
 							<frontend_type>text</frontend_type>
@@ -285,7 +285,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</inbound>
+						</inbound><!--
 						<duty_account_number translate="label">
 							<label>Duty account number</label>
 							<frontend_type>text</frontend_type>
@@ -301,7 +301,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
-						</payer>
+						</payer>-->
 <!--						pickup-->
 						<account_type translate="label">
 							<label>Account Type</label>

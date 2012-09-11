@@ -44,6 +44,12 @@ abstract class Dhl_Dhlshipment_Model_Carrier_Abstract extends Mage_Shipping_Mode
 			$Quote['countryTo'] = $address['country_id'];
 			$Quote['cityTo'] = $address['city'];
 		}
+		if ($Quote['countryTo'] == null || $Quote['countryTo'] == '')
+		{
+			$Quote['postCodeTo'] = $request->getDestPostcode();
+			$Quote['countryTo'] = $request->getDestCountryId();
+			$Quote['cityTo'] = $request->getDestCity();
+		}
 
 		$Quote['countryCode'] = $originSetting['origin']['country_id'];
 		$Quote['postcode'] = $originSetting['origin']['postcode'];
@@ -74,6 +80,15 @@ abstract class Dhl_Dhlshipment_Model_Carrier_Abstract extends Mage_Shipping_Mode
 				$price = $api['price'];
 			$method->setPrice($price);
 			$result->append($method);
+		}
+		if ($valueApi['status'] == 'error')
+		{
+			$error = Mage::getModel('shipping/rate_result_error');
+			$error->setCarrier($this->_code);
+			$error->setCarrierTitle($this->getConfigData('title'));
+			$error->setErrorMessage($errorTitle);
+			$error->setErrorMessage($valueApi['message']);
+			return $error;
 		}
 
 		return $result;
