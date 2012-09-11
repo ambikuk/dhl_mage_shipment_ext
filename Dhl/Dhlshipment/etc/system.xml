@@ -183,7 +183,7 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
 						</specificcountry>
-						<shipment_type translate="label">
+<!--						<shipment_type translate="label">
 							<label>Shipment Type</label>
 							<frontend_type>select</frontend_type>
 							<source_model>dhlshipment/carrier_source_type</source_model>
@@ -191,7 +191,7 @@
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</shipment_type>
+						</shipment_type>-->
 						<allowed_methods translate="label">
 							<label>Allowed Methods Multiple</label>
 							<frontend_type>multiselect</frontend_type>

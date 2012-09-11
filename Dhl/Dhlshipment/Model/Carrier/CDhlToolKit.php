@@ -130,8 +130,8 @@ class CDhlToolKit
 			$getXml = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
 			$allow = explode(",", $getXml->getConfigXml('allowed_methods'));
 			$rArray = array();
-			if ($getXml->getConfigXml('shipment_type') == 'M')
-			{
+//			if ($getXml->getConfigXml('shipment_type') == 'M')
+//			{
 				$qtdShp = $xml->GetQuoteResponse->BkgDetails->QtdShp;
 
 				foreach ($qtdShp as $qtd)
@@ -183,56 +183,56 @@ class CDhlToolKit
 					array_push($rArray, array('name' => $title, 'price' => $price));
 					}
 				}
-			}
-			else if ($getXml->getConfigXml('payment_type') == 'P')
-			{
-				$qtdShp = $xml->GetQuoteResponse->BkgDetails->QtdShp;
-				foreach ($qtdShp as $qtd)
-				{
-					$weightCharge = $qtd->WeightCharge;
-					$tax = $qtd->WeightChargeTax;
-					$ff=0;
-					$rasc=0;
-					$price = $qtd->ShippingCharge;
-					$localProductName = $qtd->ProductShortName;
-					
-					for($countertemp=0;$countertemp<count($qtd->QtdShpExChrg);$countertemp++){
-						if($qtd->QtdShpExChrg[$countertemp]->LocalServiceType=="FF"){
-							//we found the Fuel surcharge value. update the costing
-							$ff=$qtd->QtdShpExChrg[$countertemp]->ChargeValue;
-						}
-						if($qtd->QtdShpExChrg[$countertemp]->LocalServiceType=="REMOTE AREA SERVICE"){
-							//we found the remote area charge value. update the costing
-							$rasc=$qtd->QtdShpExChrg[$countertemp]->ChargeValue;
-						}							
-					}
-					$title = $localProductName;
-
-					if ($getXml->getConfigXml('show_payment') == 'B')
-					{
-						$title .= ' (Freight Charge:' . $weightCharge . ', Fuel Surcharge:' . $ff;
-
-						if(intval($rasc) > 0)
-							$title .= ', Remote Area Service Charge:' . $rasc;
-
-						if (intval($getXml->getXmlHandlingFee()) > 0)
-						{
-							$title .= ', Additional Charge:' . $getXml->getConfigXml('handling_fee');
-						}
-						if ($getXml->getConfigXml('transit_time') == 1)
-						{
-							$transit = $qtd->TotalTransitDays + $getXml->getConfigXml('add_transit_day');
-							$title .= ', Transit Day:' . $transit . ' Days';
-						}
-						$title .= ')';
-					}
-					else if ($getXml->getConfigXml('show_payment') == 'T')
-					{
-						$title = $localProductName;
-					}
-					array_push($rArray, array('name' => $title, 'price' => $price));
-				}
-			}
+//			}
+//			else if ($getXml->getConfigXml('payment_type') == 'P')
+//			{
+//				$qtdShp = $xml->GetQuoteResponse->BkgDetails->QtdShp;
+//				foreach ($qtdShp as $qtd)
+//				{
+//					$weightCharge = $qtd->WeightCharge;
+//					$tax = $qtd->WeightChargeTax;
+//					$ff=0;
+//					$rasc=0;
+//					$price = $qtd->ShippingCharge;
+//					$localProductName = $qtd->ProductShortName;
+//					
+//					for($countertemp=0;$countertemp<count($qtd->QtdShpExChrg);$countertemp++){
+//						if($qtd->QtdShpExChrg[$countertemp]->LocalServiceType=="FF"){
+//							//we found the Fuel surcharge value. update the costing
+//							$ff=$qtd->QtdShpExChrg[$countertemp]->ChargeValue;
+//						}
+//						if($qtd->QtdShpExChrg[$countertemp]->LocalServiceType=="REMOTE AREA SERVICE"){
+//							//we found the remote area charge value. update the costing
+//							$rasc=$qtd->QtdShpExChrg[$countertemp]->ChargeValue;
+//						}							
+//					}
+//					$title = $localProductName;
+//
+//					if ($getXml->getConfigXml('show_payment') == 'B')
+//					{
+//						$title .= ' (Freight Charge:' . $weightCharge . ', Fuel Surcharge:' . $ff;
+//
+//						if(intval($rasc) > 0)
+//							$title .= ', Remote Area Service Charge:' . $rasc;
+//
+//						if (intval($getXml->getXmlHandlingFee()) > 0)
+//						{
+//							$title .= ', Additional Charge:' . $getXml->getConfigXml('handling_fee');
+//						}
+//						if ($getXml->getConfigXml('transit_time') == 1)
+//						{
+//							$transit = $qtd->TotalTransitDays + $getXml->getConfigXml('add_transit_day');
+//							$title .= ', Transit Day:' . $transit . ' Days';
+//						}
+//						$title .= ')';
+//					}
+//					else if ($getXml->getConfigXml('show_payment') == 'T')
+//					{
+//						$title = $localProductName;
+//					}
+//					array_push($rArray, array('name' => $title, 'price' => $price));
+//				}
+//			}
 		}
 		return $rArray;
 	}

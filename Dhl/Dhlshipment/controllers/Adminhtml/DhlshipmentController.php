@@ -145,7 +145,11 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$at->filename = $model->getTrackingAwb().'.pdf';
 
 		if ($mail->send())
-			$this->_redirect('*/*/');
+		{
+			echo "<script>alert('Email Hasbeen Send');window.history.back();</script>";
+			die();
+		}	
+//			$this->_redirect('*/*/');
 		else
 			die('send mail error');
 	}
