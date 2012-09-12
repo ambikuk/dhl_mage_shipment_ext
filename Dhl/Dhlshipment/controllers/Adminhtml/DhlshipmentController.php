@@ -233,7 +233,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		//colomn 4
 		$page->drawText($xmlResponse->OriginServiceArea->OutboundSortCode, 314, 640, 'UTF-8');
 		$page->setFont($font, 13);
-		$page->drawText($xmlResponse->DestinationServiceArea->ServiceAreaCode, 410, 640, 'UTF-8');
+		$page->drawText($xmlResponse->Consignee->CountryCode.'-'.$xmlResponse->DestinationServiceArea->ServiceAreaCode.'-'.$xmlResponse->DestinationServiceArea->FacilityCode, 380, 640, 'UTF-8');
 		$page->setFont($font, 10);
 		$page->drawText($xmlResponse->DestinationServiceArea->InboundSortCode, 520, 640, 'UTF-8');
 
