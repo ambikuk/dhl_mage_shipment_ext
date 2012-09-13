@@ -49,6 +49,7 @@ class Dhl_Dhlshipment_Model_Order_Observer
 	protected $xmlResponse;
 	protected $payer;
 	protected $dutyAccountNumber;
+	protected $orderId;
 
 	public function _construct()
 	{
@@ -554,6 +555,7 @@ class Dhl_Dhlshipment_Model_Order_Observer
 
 	public function asisXml($orderId, $xmlRequestType, $type = 'tracking')
 	{
+		$this->orderId = $orderId;
 		$getXml = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
 
 //pengirim
@@ -915,7 +917,7 @@ class Dhl_Dhlshipment_Model_Order_Observer
 			<ShipperEIN>Text</ShipperEIN>
 		</Dutiable>
 		<Reference>
-			<ReferenceID>REF-00000008</ReferenceID>
+			<ReferenceID>$this->orderId</ReferenceID>
 			<ReferenceType>St</ReferenceType>
 		</Reference>
 		<ShipmentDetails>
@@ -1153,8 +1155,6 @@ SCRIPT;
 					break;
 			}
 		}
-//		var_dump($this);
-//		exit;
 		return $this;
 	}
 
