@@ -184,6 +184,35 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 		$width = $page->getWidth(); // A4 : 595
 		$height = $page->getHeight(); // A4 : 842
+		$page = $this->contentPdf($page,$model,$xmlResponse);
+		$imagePath = dirname(__FILE__) . '/label1.png';
+		$image = Zend_Pdf_Image::imageWithPath($imagePath);
+		$page->drawImage($image, 0, 500, 23, 750);
+		$pdf->pages[] = $page;
+		
+		// ARCIVE
+		$page = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+		$width = $page->getWidth(); // A4 : 595
+		$height = $page->getHeight(); // A4 : 842
+		$page = $this->contentPdf($page,$model,$xmlResponse);
+		$imagePath = dirname(__FILE__) . '/label2.png';
+		$image = Zend_Pdf_Image::imageWithPath($imagePath);
+		$page->drawImage($image, 0, 500, 23, 750);
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
+		$page->setFont($font, 8);
+		$page->drawText('Arcive Doc', 314, 813, 'UTF-8');
+		
+		$pdf->pages[] = $page;
+		$fileName = $xmlResponse->AirwayBillNumber . '.pdf';
+
+		$this->getResponse()->setHeader('Content-type', 'application/x-pdf', true);
+		$this->getResponse()->setHeader('Content-Disposition', 'inline; filename="' . $fileName . '"', true);
+		$this->getResponse()->setBody($pdf->render());
+		
+		return $pdf->render();
+	}		
+	
+	public function contentPdf($page,$model,$xmlResponse){
 		//header
 		$imagePath = dirname(__FILE__) . '/invoice.png';
 		$image = Zend_Pdf_Image::imageWithPath($imagePath);
@@ -311,18 +340,9 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->drawText('WAYBILL ' . $xmlResponse->AirwayBillNumber, 380, 493, 'UTF-8');
 		$page->drawText('(2L) ' . $xmlResponse->DHLRoutingCode, 380, 433, 'UTF-8');
 		$page->drawText('(J) ' . $xmlResponse->Pieces->Piece->LicensePlate, 380, 370, 'UTF-8');
-
-
-		$pdf->pages[] = $page;
-
-		$fileName = $xmlResponse->AirwayBillNumber . '.pdf';
-
-		$this->getResponse()->setHeader('Content-type', 'application/x-pdf', true);
-		$this->getResponse()->setHeader('Content-Disposition', 'inline; filename="' . $fileName . '"', true);
-		$this->getResponse()->setBody($pdf->render());
 		
-		return $pdf->render();
-	}		
+		return $page;
+	}
 
 	public function xmlAction(){
 		header('content-type: text/plain');
