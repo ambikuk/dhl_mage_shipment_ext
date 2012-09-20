@@ -57,9 +57,10 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$this->_initAction()
 				->renderLayout();
 	}
-/*
- * create shipmenet validation 
- */
+	/*
+	 * create shipmenet validation 
+	 */
+
 	public function createawbAction()
 	{
 		$id = $this->getRequest()->getParam('id');
@@ -76,9 +77,10 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		if ($model->save())
 			$this->_redirect('*/*/');
 	}
-/*
- * create pickup 
- */
+	/*
+	 * create pickup 
+	 */
+
 	public function pickupAction()
 	{
 		$id = $this->getRequest()->getParam('id');
@@ -88,21 +90,22 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$xmlResponse = simplexml_load_string($response);
 
 		$model->setStatusPickup($response);
-		
+
 		$model->setPickup($xmlResponse->ConfirmationNumber);
 
 		if ($model->save())
 			$this->_redirect('*/*/');
 	}
-/*
- * create return order 
- */
+	/*
+	 * create return order 
+	 */
+
 	public function returnawbAction()
 	{
 		$id = $this->getRequest()->getParam('id');
 		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
 
-		$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation','return');
+		$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation', 'return');
 
 		$response = $xmlObj->getResponse();
 
@@ -113,56 +116,59 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		if ($model->save())
 			$this->_redirect('*/*/');
 	}
-/*
- * create shipmenet validation 
- */
+	/*
+	 * create shipmenet validation 
+	 */
+
 	public function mailAction()
 	{
 		$id = $this->getRequest()->getParam('id');
 		$typeXml = $this->getRequest()->getParam('type_xml');
 		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
-		
+
 		$orderId = $model->getOrderId();
 		$order = Mage::getSingleton('sales/order')->loadByIncrementId($orderId);
 		$address = Mage::getModel('sales/order_address')->load($order->shipping_address_id);
-		
+
 		$xmlConfig = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
-		
+
 		$subject = str_replace('{order_id}', $model->getOrderId(), $xmlConfig->getConfigXml('pdf_email_subject'));
-		
+
 		$mail = new Zend_Mail();
 		$mail->setBodyText($xmlConfig->getConfigXml('pdf_email_body'));
 		$mail->setFrom($xmlConfig->getConfigXml('pdf_email_from'), Mage::app()->getStore()->getName());
 		$mail->addTo($address->email, 'Recipient');
 		$mail->setSubject($subject);
-		
-		$pdf = $this->getPdf($id,$typeXml);
+
+		$pdf = $this->getPdf($id, $typeXml);
 
 		$at = $mail->createAttachment($pdf);
 		$at->type = 'application/pdf';
 		$at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT;
 		$at->encoding = Zend_Mime::ENCODING_BASE64;
-		$at->filename = $model->getTrackingAwb().'.pdf';
+		$at->filename = $model->getTrackingAwb() . '.pdf';
 
 		if ($mail->send())
 		{
 			echo "<script>alert('Email Hasbeen Send');window.history.back();</script>";
 			die();
-		}	
+		}
 //			$this->_redirect('*/*/');
 		else
 			die('send mail error');
 	}
-/*
- * create pdf for invoice
- */
+	/*
+	 * create pdf for invoice
+	 */
+
 	public function pdfAction()
 	{
 		$id = $this->getRequest()->getParam('id');
 		$typeXml = $this->getRequest()->getParam('type_xml');
-		$this->getPdf($id,$typeXml);
+		$this->getPdf($id, $typeXml);
 	}
-	public function getPdf($id,$typeXml='tracking')
+
+	public function getPdf($id, $typeXml = 'tracking')
 	{
 		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
 		if ($typeXml == 'return')
@@ -184,44 +190,149 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 		$width = $page->getWidth(); // A4 : 595
 		$height = $page->getHeight(); // A4 : 842
-		$page = $this->contentPdf($page,$model,$xmlResponse);
+		$imagePath = dirname(__FILE__) . '/invoice.png';
+		$image = Zend_Pdf_Image::imageWithPath($imagePath);
+		$page->drawImage($image, 300, 150, 550, 835);
+		$page = $this->contentPdf($page, $model, $xmlResponse);
+
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
+		$page->setFont($font, 8);
+		$page->drawText($xmlResponse->ProductShortName, 314, 805, 'UTF-8');
+		$page->setFont($font, 6);
+		$page->drawText('XML PI v4.0', 314, 799, 'UTF-8');
+
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
+		$page->setFont($font, 5);
+		$page->drawText('Order #' . $model->getOrderId(), 314, 597, 'UTF-8');
+		$page->drawText('Piece Weight:', 420, 597, 'UTF-8');
+
+		$barcode_binary = base64_decode($xmlResponse->Barcodes->AWBBarCode);
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir) . '.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
+		$image = Zend_Pdf_Image::imageWithPath($png_file);
+		$page->drawImage($image, 320, 500, 480, 550);
+
+		$barcode_binary = base64_decode($xmlResponse->Barcodes->OriginDestnBarcode);
+		// Temporary dir
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir) . '.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
+		$image = Zend_Pdf_Image::imageWithPath($png_file);
+		$page->drawImage($image, 320, 440, 520, 490);
+
+
+		$barcode_binary = base64_decode($xmlResponse->Barcodes->DHLRoutingBarCode);
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir) . '.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
+		$image = Zend_Pdf_Image::imageWithPath($png_file);
+		$page->drawImage($image, 320, 380, 520, 430);
+
+		$page->setFont($font, 8);
+		$page->drawText('WAYBILL ' . $xmlResponse->AirwayBillNumber, 380, 493, 'UTF-8');
+		$page->drawText('(2L) ' . $xmlResponse->DHLRoutingCode, 380, 433, 'UTF-8');
+		$page->drawText('(J) ' . $xmlResponse->Pieces->Piece->LicensePlate, 380, 370, 'UTF-8');
+
+		//colomn 7
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
+		$page->setFont($font, 5);
+		$page->drawText('Content: ' . $xmlResponse->Contents, 314, 570, 'UTF-8');
+
 		$imagePath = dirname(__FILE__) . '/label1.png';
 		$image = Zend_Pdf_Image::imageWithPath($imagePath);
 		$page->drawImage($image, 0, 500, 23, 750);
 		$pdf->pages[] = $page;
-		
+
 		// ARCIVE
 		$page = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 		$width = $page->getWidth(); // A4 : 595
 		$height = $page->getHeight(); // A4 : 842
-		$page = $this->contentPdf($page,$model,$xmlResponse);
+		$imagePath = dirname(__FILE__) . '/invoice2.png';
+		$image = Zend_Pdf_Image::imageWithPath($imagePath);
+		$page->drawImage($image, 300, 150, 550, 835);
+		$page = $this->contentPdf($page, $model, $xmlResponse);
+		$page = $this->contentPdf($page, $model, $xmlResponse);
 		$imagePath = dirname(__FILE__) . '/label2.png';
 		$image = Zend_Pdf_Image::imageWithPath($imagePath);
 		$page->drawImage($image, 0, 500, 23, 750);
+
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
 		$page->setFont($font, 8);
-		$page->drawText('Arcive Doc', 314, 813, 'UTF-8');
+		$page->drawText('*ARCHIVE DOC*', 314, 805, 'UTF-8');
+		$page->setFont($font, 6);
+		$page->drawText('Do not attach to package', 314, 799, 'UTF-8');
+
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
+		$page->setFont($font, 5);
+		$page->drawText('Account No: ' . $xmlResponse->Billing->BillingAccountNumber, 314, 597, 'UTF-8');
+		$page->drawText('Order #' . $model->getOrderId(), 314, 590, 'UTF-8');
+		$page->drawText('Shipment Weight:', 411, 597, 'UTF-8');
+
+		$barcode_binary = base64_decode($xmlResponse->Barcodes->AWBBarCode);
+		$tmp_dir = Mage::getBaseDir('tmp');
+		$png_file = tempnam($tmp_dir) . '.png';
+//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
+		file_put_contents($png_file, $barcode_binary);
+//		$png_file = $tmp_file . '.png';
+//		rename($tmp_file, $png_file);
+		$image = Zend_Pdf_Image::imageWithPath($png_file);
+		$page->drawImage($image, 320, 500, 480, 550);
+
+		$page->setFont($font, 8);
+		$page->drawText('WAYBILL ' . $xmlResponse->AirwayBillNumber, 380, 493, 'UTF-8');
+
+		//colomn 7
+		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
+		$page->setFont($font, 5);
+		$page->drawText('DHL standard Terms and Conditions apply. Warsaw convention may olso apply.', 314, 570, 'UTF-8');
+		$page->drawText('Shipment may be carried via intermediated stopping places DHL deems appropriate.', 314, 565, 'UTF-8');
+		$page->drawText('Content: ' . $xmlResponse->Contents, 314, 560, 'UTF-8');
 		
+		$page->setFont($font, 6);
+		$page->drawText('Product                   : ' . $xmlResponse->GlobalProductCode.' '.$xmlResponse->ProductShortName, 314, 462, 'UTF-8');
+		$page->drawText('Service                   : ', 314, 456, 'UTF-8');
+		$page->drawText('Billing Account No  : ' . $xmlResponse->Billing->BillingAccountNumber, 314, 450, 'UTF-8');
+		$page->drawText('DTP Account No     : ', 314, 444, 'UTF-8');
+		$page->drawText('Insurance value      : ' . $xmlResponse->InsuredAmount, 314, 438, 'UTF-8');
+		$page->drawText('Declared Value       : ' . $xmlResponse->Dutiable->DeclaredValue.' '.$xmlResponse->Dutiable->DeclaredCurrency, 314, 432, 'UTF-8');
+		$page->drawText('Terms of Trade       : ' . $xmlResponse->Dutiable->TermsofTrade, 314, 426, 'UTF-8');
+		
+		$page->drawText('Licence plates of Pieces in Shipment : ', 314, 410, 'UTF-8');
+		$page->drawText('-('.$xmlResponse->Pieces->Piece->DataIdentifier.')'.$this->spacepablic($xmlResponse->Pieces->Piece->LicensePlate), 314, 403, 'UTF-8');
+
 		$pdf->pages[] = $page;
 		$fileName = $xmlResponse->AirwayBillNumber . '.pdf';
 
 		$this->getResponse()->setHeader('Content-type', 'application/x-pdf', true);
 		$this->getResponse()->setHeader('Content-Disposition', 'inline; filename="' . $fileName . '"', true);
 		$this->getResponse()->setBody($pdf->render());
-		
+
 		return $pdf->render();
-	}		
+	}
 	
-	public function contentPdf($page,$model,$xmlResponse){
+	public function spacepablic($str){
+		$read = str_split($str, 4);
+		foreach($read as $r){
+			$n .= $r.' ';
+		}
+		return $n;
+	}
+
+	public function contentPdf($page, $model, $xmlResponse)
+	{
 		//header
-		$imagePath = dirname(__FILE__) . '/invoice.png';
-		$image = Zend_Pdf_Image::imageWithPath($imagePath);
-		$page->drawImage($image, 300, 150, 550, 835);
+
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
-		$page->setFont($font, 8);
-		$page->drawText($xmlResponse->ProductShortName, 314, 805, 'UTF-8');
-		$page->setFont($font, 6);
-		$page->drawText('XML PI v4.0', 314, 799, 'UTF-8');
 		$page->setFillColor(Zend_Pdf_Color_Html::color('#FFFFFF'));
 		$page->setFont($font, 15);
 		$page->drawText($xmlResponse->ProductContentCode, 425, 805, 'UTF-8');
@@ -262,7 +373,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		//colomn 4
 		$page->drawText($xmlResponse->OriginServiceArea->OutboundSortCode, 314, 640, 'UTF-8');
 		$page->setFont($font, 13);
-		$page->drawText($xmlResponse->Consignee->CountryCode.'-'.$xmlResponse->DestinationServiceArea->ServiceAreaCode.'-'.$xmlResponse->DestinationServiceArea->FacilityCode, 380, 640, 'UTF-8');
+		$page->drawText($xmlResponse->Consignee->CountryCode . '-' . $xmlResponse->DestinationServiceArea->ServiceAreaCode . '-' . $xmlResponse->DestinationServiceArea->FacilityCode, 380, 640, 'UTF-8');
 		$page->setFont($font, 10);
 		$page->drawText($xmlResponse->DestinationServiceArea->InboundSortCode, 520, 640, 'UTF-8');
 
@@ -280,10 +391,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->drawText('Time', 515, 618, 'UTF-8');
 
 		//colomn 6
-		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
 		$page->setFont($font, 5);
-		$page->drawText('Order #' . $model->getOrderId(), 314, 597, 'UTF-8');
-		$page->drawText('Piece Weight:', 420, 597, 'UTF-8');
 		$page->drawText('Date', 420, 584, 'UTF-8');
 		$page->drawText('Piece:', 507, 597, 'UTF-8');
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
@@ -297,63 +405,20 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->drawText('1/1', 507, 585, 'UTF-8');
 
 
-		//colomn 7
-		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
-		$page->setFont($font, 5);
-		$page->drawText('Content: ' . $xmlResponse->Contents, 314, 570, 'UTF-8');
-
-
-		$barcode_binary = base64_decode($xmlResponse->Barcodes->AWBBarCode);
-		$tmp_dir = Mage::getBaseDir('tmp');
-		$png_file = tempnam($tmp_dir).'.png';
-//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($png_file, $barcode_binary);
-//		$png_file = $tmp_file . '.png';
-//		rename($tmp_file, $png_file);
-		$image = Zend_Pdf_Image::imageWithPath($png_file);
-		$page->drawImage($image, 320, 500, 480, 550);
-
-//pak ivan		
-		$barcode_binary = base64_decode($xmlResponse->Barcodes->OriginDestnBarcode);
-		// Temporary dir
-		$tmp_dir = Mage::getBaseDir('tmp');
-		$png_file = tempnam($tmp_dir).'.png';
-//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($png_file, $barcode_binary);
-//		$png_file = $tmp_file . '.png';
-//		rename($tmp_file, $png_file);
-		$image = Zend_Pdf_Image::imageWithPath($png_file);
-		$page->drawImage($image, 320, 440, 520, 490);
-
-	
-		$barcode_binary = base64_decode($xmlResponse->Barcodes->DHLRoutingBarCode);
-		$tmp_dir = Mage::getBaseDir('tmp');
-		$png_file = tempnam($tmp_dir).'.png';
-//		$tmp_file = array_search('uri', @array_flip(stream_get_meta_data($GLOBALS[mt_rand()] = tmpfile())));
-		file_put_contents($png_file, $barcode_binary);
-//		$png_file = $tmp_file . '.png';
-//		rename($tmp_file, $png_file);
-		$image = Zend_Pdf_Image::imageWithPath($png_file);
-		$page->drawImage($image, 320, 380, 520, 430);
-
-		$page->setFont($font, 8);
-		$page->drawText('WAYBILL ' . $xmlResponse->AirwayBillNumber, 380, 493, 'UTF-8');
-		$page->drawText('(2L) ' . $xmlResponse->DHLRoutingCode, 380, 433, 'UTF-8');
-		$page->drawText('(J) ' . $xmlResponse->Pieces->Piece->LicensePlate, 380, 370, 'UTF-8');
-		
 		return $page;
 	}
 
-	public function xmlAction(){
+	public function xmlAction()
+	{
 		header('content-type: text/plain');
 		$id = $this->getRequest()->getParam('id');
 		$type = $this->getRequest()->getParam('type');
 		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
-		if($type=='shipmentvalidation')
+		if ($type == 'shipmentvalidation')
 			echo $model->getStatusAwb();
-		elseif($type=='return')
+		elseif ($type == 'return')
 			echo $model->getStatusReturn();
-		elseif($type=='pickup')
+		elseif ($type == 'pickup')
 			echo $model->getStatusPickup();
 		exit;
 	}
