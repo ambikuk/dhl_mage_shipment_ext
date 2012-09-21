@@ -179,7 +179,7 @@ class Dhl_Dhlshipment_Model_Carrier_Dhlshipment extends Dhl_Dhlshipment_Model_Ca
 			return $codes[$type][$code];
 		}
 	}
-public function getGenerateAwb()
+	public function getGenerateAwb()
 	{
 		if (isset($_POST['b-submit']) || isset($_GET['tracking']))
 		{
@@ -195,8 +195,8 @@ public function getGenerateAwb()
 						TrackingRequestKnown.xsd">
 	<Request>
 		<ServiceHeader>
-			<MessageTime>'.$this->time.'</MessageTime>
-			<MessageReference>'.$this->mref.'</MessageReference>
+			<MessageTime>' . $this->time . '</MessageTime>
+			<MessageReference>' . $this->mref . '</MessageReference>
         <SiteID>' . $this->getConfigXml("id") . '</SiteID>
         <Password>' . $this->getConfigXml("password") . '</Password>
 		</ServiceHeader>
@@ -210,22 +210,22 @@ public function getGenerateAwb()
 			$results = $this->sendXmlOverPost($xml);
 			$xml = simplexml_load_string($results);
 //			var_dump($xml);exit;
-			echo "Number : " . $xml->AWBInfo->AWBNumber.'<br />';
-			echo "Origin Service Area : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->ServiceAreaCode.'<br />';
-			echo "Description : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->Description.'<br />';
-			echo "Destination Service Area : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->ServiceAreaCode.'<br />';
-			echo "Description : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->Description.'<br />';
-			echo "Shipper Name : " . $xml->AWBInfo->ShipmentInfo->ShipperName.'<br />';
-			echo "Consignee Name : " . $xml->AWBInfo->ShipmentInfo->ConsigneeName.'<br />';
-			echo "Shipment Date : " . $xml->AWBInfo->ShipmentInfo->ShipmentDate.'<br />';
-			echo "Pieces : " . $xml->AWBInfo->ShipmentInfo->Pieces.'<br />';
-			echo "Weight : " . $xml->AWBInfo->ShipmentInfo->Weight.'<br />';
-			echo "Weight Unit : " . $xml->AWBInfo->ShipmentInfo->WeightUnit.'<br />';
-			echo "Global Product Code : " . $xml->AWBInfo->ShipmentInfo->GlobalProductCode.'<br />';
-			echo "Shipment Desc : " . $xml->AWBInfo->ShipmentInfo->ShipmentDesc.'<br />';
-			echo "Notifucation Flag : " . $xml->AWBInfo->ShipmentInfo->DlvyNotificationFlag.'<br />';
-			echo "From : " . $xml->AWBInfo->ShipmentInfo->Shipper->City.' '.$xml->ShipmentInfo->Shipper->Postalcode.' '.$xml->ShipmentInfo->Shipper->CountryCode.'<br />';
-			echo "To : " . $xml->AWBInfo->ShipmentInfo->Consignee->City.' '.$xml->ShipmentInfo->Consignee->Postalcode.' '.$xml->ShipmentInfo->Consignee->CountryCode.'<br />';
+			echo "Number : " . $xml->AWBInfo->AWBNumber . '<br />';
+			echo "Origin Service Area : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->ServiceAreaCode . '<br />';
+			echo "Description : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->Description . '<br />';
+			echo "Destination Service Area : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->ServiceAreaCode . '<br />';
+			echo "Description : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->Description . '<br />';
+			echo "Shipper Name : " . $xml->AWBInfo->ShipmentInfo->ShipperName . '<br />';
+			echo "Consignee Name : " . $xml->AWBInfo->ShipmentInfo->ConsigneeName . '<br />';
+			echo "Shipment Date : " . $xml->AWBInfo->ShipmentInfo->ShipmentDate . '<br />';
+			echo "Pieces : " . $xml->AWBInfo->ShipmentInfo->Pieces . '<br />';
+			echo "Weight : " . $xml->AWBInfo->ShipmentInfo->Weight . '<br />';
+			echo "Weight Unit : " . $xml->AWBInfo->ShipmentInfo->WeightUnit . '<br />';
+			echo "Global Product Code : " . $xml->AWBInfo->ShipmentInfo->GlobalProductCode . '<br />';
+			echo "Shipment Desc : " . $xml->AWBInfo->ShipmentInfo->ShipmentDesc . '<br />';
+			echo "Notifucation Flag : " . $xml->AWBInfo->ShipmentInfo->DlvyNotificationFlag . '<br />';
+			echo "From : " . $xml->AWBInfo->ShipmentInfo->Shipper->City . ' ' . $xml->ShipmentInfo->Shipper->Postalcode . ' ' . $xml->ShipmentInfo->Shipper->CountryCode . '<br />';
+			echo "To : " . $xml->AWBInfo->ShipmentInfo->Consignee->City . ' ' . $xml->ShipmentInfo->Consignee->Postalcode . ' ' . $xml->ShipmentInfo->Consignee->CountryCode . '<br />';
 			foreach ($xml->AWBInfo->Status as $stat)
 			{
 				echo "<br />ActionStatus : " . $stat->ActionStatus;

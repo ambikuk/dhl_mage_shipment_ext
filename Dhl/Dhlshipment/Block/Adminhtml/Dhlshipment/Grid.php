@@ -49,6 +49,7 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 			'width' => '80px',
 			'type' => 'text',
 			'index' => 'increment_id',
+			'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Checkawb'
 		));
 		$this->addColumn('billing_name', array(
 			'header' => Mage::helper('sales')->__('Bill to Name'),
