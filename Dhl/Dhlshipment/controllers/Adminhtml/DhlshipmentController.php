@@ -58,24 +58,73 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 				->renderLayout();
 	}
 	/*
+	 * Create Awb
+	 */
+
+	protected function createawb($id)
+	{
+		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
+		if ($model->getTrackingAwb() == 0)
+		{
+			$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation');
+			$response = $xmlObj->getResponse();
+			$xmlResponse = simplexml_load_string($response);
+			$model->setStatusAwb($response);
+			$model->setTrackingAwb($xmlResponse->AirwayBillNumber);
+			if ($model->save())
+				return true;
+		}
+		else
+			return false;
+	}
+	/*
 	 * create shipmenet validation 
 	 */
 
 	public function createawbAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
-
-		$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation');
-
-		$response = $xmlObj->getResponse();
-
-		$xmlResponse = simplexml_load_string($response);
-
-		$model->setStatusAwb($response);
-		$model->setTrackingAwb($xmlResponse->AirwayBillNumber);
-		if ($model->save())
+		if ($this->createawb($id))
 			$this->_redirect('*/*/');
+	}
+	/*
+	 *  Create AWB for selected
+	 */
+
+	public function masscreateawbAction()
+	{
+		$orderIds = $this->getRequest()->getPost('order_ids');
+		foreach ($orderIds as $orderId)
+		{
+			$model = Mage::getModel('dhlshipment/dhlshipment')->load($orderId);
+			if ($this->createawb($orderId))
+				$this->_getSession()->addSuccess($this->__('Success.' . $model->getOrderId()));
+			else
+				$this->_getSession()->addError($this->__('Error.' . $model->getOrderId()));
+		}
+		$this->_redirect('*/*/');
+	}
+	/*
+	 * Create Awb
+	 */
+
+	protected function pickup($id)
+	{
+		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
+		if ($model->getPickup() == '' || $model->getPickup() == NULL)
+		{
+			if ($model->getTrackingAwb() == 0)
+				return false;
+			$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'bookingpickup');
+			$response = $xmlObj->getResponse();
+			$xmlResponse = simplexml_load_string($response);
+			$model->setStatusPickup($response);
+			$model->setPickup($xmlResponse->ConfirmationNumber);
+			if ($model->save())
+				return true;
+		}
+		else
+			return false;
 	}
 	/*
 	 * create pickup 
@@ -84,17 +133,43 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 	public function pickupAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
-		$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'bookingpickup');
-		$response = $xmlObj->getResponse();
-		$xmlResponse = simplexml_load_string($response);
-
-		$model->setStatusPickup($response);
-
-		$model->setPickup($xmlResponse->ConfirmationNumber);
-
-		if ($model->save())
+		if ($this->pickup($id))
 			$this->_redirect('*/*/');
+	}
+	/*
+	 * mass pickup
+	 */
+
+	public function masspickupAction()
+	{
+		$orderIds = $this->getRequest()->getPost('order_ids');
+		foreach ($orderIds as $orderId)
+		{
+			$model = Mage::getModel('dhlshipment/dhlshipment')->load($orderId);
+			if ($this->pickup($orderId))
+				$this->_getSession()->addSuccess($this->__('Success.' . $model->getOrderId()));
+			else
+				$this->_getSession()->addError($this->__('Error.' . $model->getOrderId()));
+		}
+		$this->_redirect('*/*/');
+	}
+
+	public function returnawb($id)
+	{
+		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
+		if ($model->getReturnAwb() == '' || $model->getReturnAwb() == NULL)
+		{
+			if ($model->getTrackingAwb() == 0)
+				return false;
+			$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation', 'return');
+			$response = $xmlObj->getResponse();
+			$xmlResponse = simplexml_load_string($response);
+			$model->setStatusReturn($response);
+			$model->setReturnAwb($xmlResponse->AirwayBillNumber);
+			if ($model->save())
+				return true;
+		}
+		return false;
 	}
 	/*
 	 * create return order 
@@ -103,18 +178,25 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 	public function returnawbAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		$model = Mage::getModel('dhlshipment/dhlshipment')->load($id);
-
-		$xmlObj = Mage::helper('dhlshipment')->xmlRequest($model->getOrderId(), 'shipmentvalidation', 'return');
-
-		$response = $xmlObj->getResponse();
-
-		$xmlResponse = simplexml_load_string($response);
-
-		$model->setStatusReturn($response);
-		$model->setReturnAwb($xmlResponse->AirwayBillNumber);
-		if ($model->save())
+		if($this->returnawb($id))
 			$this->_redirect('*/*/');
+	}
+	/*
+	 * mass pickup
+	 */
+
+	public function massreturnawbAction()
+	{
+		$orderIds = $this->getRequest()->getPost('order_ids');
+		foreach ($orderIds as $orderId)
+		{
+			$model = Mage::getModel('dhlshipment/dhlshipment')->load($orderId);
+			if ($this->returnawb($orderId))
+				$this->_getSession()->addSuccess($this->__('Success.' . $model->getOrderId()));
+			else
+				$this->_getSession()->addError($this->__('Error.' . $model->getOrderId()));
+		}
+		$this->_redirect('*/*/');
 	}
 	/*
 	 * create shipmenet validation 
@@ -274,8 +356,8 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA);
 		$page->setFont($font, 5);
-		$page->drawText('Account No: ' . $xmlResponse->Billing->BillingAccountNumber, 314, 597, 'UTF-8');
-		$page->drawText('Order #' . $model->getOrderId(), 314, 590, 'UTF-8');
+//		$page->drawText('Account No: ' . $xmlResponse->Billing->BillingAccountNumber, 314, 597, 'UTF-8');
+		$page->drawText('Order #' . $model->getOrderId(), 314, 597, 'UTF-8');
 		$page->drawText('Shipment Weight:', 411, 597, 'UTF-8');
 
 		$barcode_binary = base64_decode($xmlResponse->Barcodes->AWBBarCode);
@@ -301,11 +383,11 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$page->setFont($font, 6);
 		$page->drawText('Product                   : ' . $xmlResponse->GlobalProductCode . ' ' . $xmlResponse->ProductShortName, 314, 462, 'UTF-8');
 		$page->drawText('Service                   : ', 314, 456, 'UTF-8');
-		$page->drawText('Billing Account No  : ' . $xmlResponse->Billing->BillingAccountNumber, 314, 450, 'UTF-8');
-		$page->drawText('DTP Account No     : ', 314, 444, 'UTF-8');
-		$page->drawText('Insurance value      : ' . $xmlResponse->InsuredAmount, 314, 438, 'UTF-8');
-		$page->drawText('Declared Value       : ' . $xmlResponse->Dutiable->DeclaredValue . ' ' . $xmlResponse->Dutiable->DeclaredCurrency, 314, 432, 'UTF-8');
-		$page->drawText('Terms of Trade       : ' . $xmlResponse->Dutiable->TermsofTrade, 314, 426, 'UTF-8');
+//		$page->drawText('Billing Account No  : ' . $xmlResponse->Billing->BillingAccountNumber, 314, 450, 'UTF-8');
+		$page->drawText('DTP Account No     : ', 314, 450, 'UTF-8');
+		$page->drawText('Insurance value      : ' . $xmlResponse->InsuredAmount, 314, 444, 'UTF-8');
+		$page->drawText('Declared Value       : ' . $xmlResponse->Dutiable->DeclaredValue . ' ' . $xmlResponse->Dutiable->DeclaredCurrency, 314, 438, 'UTF-8');
+		$page->drawText('Terms of Trade       : ' . $xmlResponse->Dutiable->TermsofTrade, 314, 432, 'UTF-8');
 
 		$page->drawText('Licence plates of Pieces in Shipment : ', 314, 410, 'UTF-8');
 		$page->drawText('-(' . $xmlResponse->Pieces->Piece->DataIdentifier . ')' . $this->spacepablic($xmlResponse->Pieces->Piece->LicensePlate), 314, 403, 'UTF-8');
@@ -429,7 +511,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 	{
 		$data = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
 		$awb = $this->getRequest()->getParam('id');
-			$xml = '<?xml version="1.0" encoding="UTF-8"?>
+		$xml = '<?xml version="1.0" encoding="UTF-8"?>
 <req:KnownTrackingRequest xmlns:req="http://www.dhl.com" 
 						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 						xsi:schemaLocation="http://www.dhl.com
@@ -448,36 +530,36 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 </req:KnownTrackingRequest>
 			 ';
 //			var_dump($xml);exit;
-			$results = $data->sendXmlOverPost($xml);
-			$xml = simplexml_load_string($results);
+		$results = $data->sendXmlOverPost($xml);
+		$xml = simplexml_load_string($results);
 //			var_dump($xml);exit;
-			echo "Number : " . $xml->AWBInfo->AWBNumber . '<br />';
-			echo "Origin Service Area : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->ServiceAreaCode . '<br />';
-			echo "Description : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->Description . '<br />';
-			echo "Destination Service Area : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->ServiceAreaCode . '<br />';
-			echo "Description : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->Description . '<br />';
-			echo "Shipper Name : " . $xml->AWBInfo->ShipmentInfo->ShipperName . '<br />';
-			echo "Consignee Name : " . $xml->AWBInfo->ShipmentInfo->ConsigneeName . '<br />';
-			echo "Shipment Date : " . $xml->AWBInfo->ShipmentInfo->ShipmentDate . '<br />';
-			echo "Pieces : " . $xml->AWBInfo->ShipmentInfo->Pieces . '<br />';
-			echo "Weight : " . $xml->AWBInfo->ShipmentInfo->Weight . '<br />';
-			echo "Weight Unit : " . $xml->AWBInfo->ShipmentInfo->WeightUnit . '<br />';
-			echo "Global Product Code : " . $xml->AWBInfo->ShipmentInfo->GlobalProductCode . '<br />';
-			echo "Shipment Desc : " . $xml->AWBInfo->ShipmentInfo->ShipmentDesc . '<br />';
-			echo "Notifucation Flag : " . $xml->AWBInfo->ShipmentInfo->DlvyNotificationFlag . '<br />';
-			echo "From : " . $xml->AWBInfo->ShipmentInfo->Shipper->City . ' ' . $xml->ShipmentInfo->Shipper->Postalcode . ' ' . $xml->ShipmentInfo->Shipper->CountryCode . '<br />';
-			echo "To : " . $xml->AWBInfo->ShipmentInfo->Consignee->City . ' ' . $xml->ShipmentInfo->Consignee->Postalcode . ' ' . $xml->ShipmentInfo->Consignee->CountryCode . '<br />';
-			foreach ($xml->AWBInfo->Status as $stat)
+		echo "Number : " . $xml->AWBInfo->AWBNumber . '<br />';
+		echo "Origin Service Area : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->ServiceAreaCode . '<br />';
+		echo "Description : " . $xml->AWBInfo->ShipmentInfo->OriginServiceArea->Description . '<br />';
+		echo "Destination Service Area : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->ServiceAreaCode . '<br />';
+		echo "Description : " . $xml->AWBInfo->ShipmentInfo->DestinationServiceArea->Description . '<br />';
+		echo "Shipper Name : " . $xml->AWBInfo->ShipmentInfo->ShipperName . '<br />';
+		echo "Consignee Name : " . $xml->AWBInfo->ShipmentInfo->ConsigneeName . '<br />';
+		echo "Shipment Date : " . $xml->AWBInfo->ShipmentInfo->ShipmentDate . '<br />';
+		echo "Pieces : " . $xml->AWBInfo->ShipmentInfo->Pieces . '<br />';
+		echo "Weight : " . $xml->AWBInfo->ShipmentInfo->Weight . '<br />';
+		echo "Weight Unit : " . $xml->AWBInfo->ShipmentInfo->WeightUnit . '<br />';
+		echo "Global Product Code : " . $xml->AWBInfo->ShipmentInfo->GlobalProductCode . '<br />';
+		echo "Shipment Desc : " . $xml->AWBInfo->ShipmentInfo->ShipmentDesc . '<br />';
+		echo "Notifucation Flag : " . $xml->AWBInfo->ShipmentInfo->DlvyNotificationFlag . '<br />';
+		echo "From : " . $xml->AWBInfo->ShipmentInfo->Shipper->City . ' ' . $xml->ShipmentInfo->Shipper->Postalcode . ' ' . $xml->ShipmentInfo->Shipper->CountryCode . '<br />';
+		echo "To : " . $xml->AWBInfo->ShipmentInfo->Consignee->City . ' ' . $xml->ShipmentInfo->Consignee->Postalcode . ' ' . $xml->ShipmentInfo->Consignee->CountryCode . '<br />';
+		foreach ($xml->AWBInfo->Status as $stat)
+		{
+			echo "<br />ActionStatus : " . $stat->ActionStatus;
+			foreach ($stat->Condition as $con)
 			{
-				echo "<br />ActionStatus : " . $stat->ActionStatus;
-				foreach ($stat->Condition as $con)
-				{
-					echo "<br />ConditionCode : " . $con->ConditionCode;
-					echo "<br />ConditionData : " . $con->ConditionData;
-				}
+				echo "<br />ConditionCode : " . $con->ConditionCode;
+				echo "<br />ConditionData : " . $con->ConditionData;
 			}
-			echo '<table cellspacing="5" cellpadding="5" class="tbltrackingawb">';
-			echo '
+		}
+		echo '<table cellspacing="5" cellpadding="5" class="tbltrackingawb">';
+		echo '
 							<tr>
 								<th>Date</th>
 								<th>Time</th>
@@ -485,9 +567,9 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 								<th>Service Event</th>
 							</tr>
 					   ';
-			foreach ($xml->AWBInfo->ShipmentInfo->ShipmentEvent as $event)
-			{
-				echo '
+		foreach ($xml->AWBInfo->ShipmentInfo->ShipmentEvent as $event)
+		{
+			echo '
 							<tr>
 								<td>' . $event->Date . '</td>
 								<td>' . $event->Time . '</td>
@@ -496,9 +578,9 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 							</tr>
 					   ';
 
-				$event->Date;
-			}
-			echo '</table>';
+			$event->Date;
+		}
+		echo '</table>';
 	}
 
 	public function newAction()

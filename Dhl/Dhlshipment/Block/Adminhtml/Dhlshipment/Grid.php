@@ -32,18 +32,6 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 
 	protected function _prepareColumns()
 	{
-//		$this->addColumn('id', array(
-//			'header' => Mage::helper('dhlshipment')->__('ID'),
-//			'align' => 'right',
-//			'width' => '50px',
-//			'index' => 'id',
-//		));
-//		$this->addColumn('shipping_description', array(
-//			'header' => Mage::helper('sales')->__('Order #'),
-//			'width' => '80px',
-//			'type' => 'text',
-//			'index' => 'shipping_description',
-//		));
 		$this->addColumn('real_order_id', array(
 			'header' => Mage::helper('sales')->__('Order #'),
 			'width' => '80px',
@@ -113,33 +101,35 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 			'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Returnawb'
 		));
 
-//		$this->addColumn('action', array(
-//			'header' => Mage::helper('dhlshipment')->__('Action'),
-//			'width' => '200',
-//			'type' => 'action',
-//			'getter' => 'getId',
-//			'actions' => array(
-//				array(
-//					'caption' => Mage::helper('dhlshipment')->__('Edit'),
-//					'url' => array('base' => '*/*/edit'),
-//					'field' => 'id'
-//				),
-////				array(
-////					'caption' => Mage::helper('sales')->__('View'),
-////					'url' => array('base' => '../index.php/admin/sales_order/view'),
-////					'field' => 'order_id'
-////				)
-//			),
-//			'filter' => false,
-//			'sortable' => false,
-//			'index' => 'tracking_awb',
-//			'is_system' => false,
-//		));
-
 		$this->addExportType('*/*/exportCsv', Mage::helper('dhlshipment')->__('CSV'));
 		$this->addExportType('*/*/exportXml', Mage::helper('dhlshipment')->__('XML'));
 
 		return parent::_prepareColumns();
+	}
+
+	protected function _prepareMassaction()
+	{
+		$this->setMassactionIdField('id');
+		$this->getMassactionBlock()->setFormFieldName('order_ids');
+		$this->getMassactionBlock()->setUseSelectAll(false);
+
+
+		$this->getMassactionBlock()->addItem('create_awb', array(
+			'label' => Mage::helper('dhlshipment')->__('Create AWB'),
+			'url' => $this->getUrl('*/*/masscreateawb'),
+		));
+
+		$this->getMassactionBlock()->addItem('return_awb', array(
+			'label' => Mage::helper('dhlshipment')->__('Return AWB'),
+			'url' => $this->getUrl('*/*/massreturnawb'),
+		));
+
+		$this->getMassactionBlock()->addItem('pickup', array(
+			'label' => Mage::helper('dhlshipment')->__('Pickup'),
+			'url' => $this->getUrl('*/*/masspickup'),
+		));
+
+		return $this;
 	}
 
 	public function getRowUrl($row)
