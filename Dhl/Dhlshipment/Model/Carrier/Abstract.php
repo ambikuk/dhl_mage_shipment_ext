@@ -55,7 +55,7 @@ abstract class Dhl_Dhlshipment_Model_Carrier_Abstract extends Mage_Shipping_Mode
 		$Quote['postcode'] = $originSetting['origin']['postcode'];
 		$Quote['city'] = $originSetting['origin']['city'];
 
-		$Quote['weight'] = $weight;
+		$Quote['weight'] = ceil($weight);
 
 		require_once dirname(__FILE__) . '/CDhlToolKit.php';
 

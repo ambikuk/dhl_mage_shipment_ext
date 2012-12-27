@@ -42,7 +42,7 @@ class CDhlToolKit
 
 	public function sendXmlOverPost($xml)
 	{
-//		var_dump($xml);exit;
+//		var_dump($xml);
 		$getUrl = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
 		$client = new Zend_Http_Client();
 		$client->setUri($getUrl->getConfigXml('gateway_url'));

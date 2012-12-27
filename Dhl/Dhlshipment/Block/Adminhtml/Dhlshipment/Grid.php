@@ -3,25 +3,26 @@
 class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->setId('dhlshipment');
-		$this->setUseAjax(true);
-		$this->setDefaultSort('created_at');
-		$this->setDefaultDir('DESC');
-		$this->setSaveParametersInSession(true);
-	}
-
-	protected function _getCollectionClass()
-	{
-		return 'sales/order_grid_collection';
-	}
+//	public function __construct()
+//	{
+//		parent::__construct();
+//		$this->setId('sales_order_grid');
+//		$this->setUseAjax(true);
+//		$this->setDefaultSort('created_at');
+//		$this->setDefaultDir('DESC');
+//		$this->setSaveParametersInSession(true);
+//	}
+//
+//	protected function _getCollectionClass()
+//	{
+//		return 'dhlshipment/dhlshipment';
+//	}
 
 	protected function _prepareCollection()
 	{
 //		$collection = Mage::getResourceModel($this->_getCollectionClass());
 		$collection = Mage::getModel('dhlshipment/dhlshipment')->getCollection();
+		$collection->setOrder('id');
 		$collection->getSelect()->join(
 				array('order' => 'sales_flat_order_grid'), 'main_table.order_id=order.increment_id', array('order.*'));
 		$collection->getSelect()->join(
@@ -36,7 +37,7 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 			'header' => Mage::helper('sales')->__('Order #'),
 			'width' => '80px',
 			'type' => 'text',
-			'index' => 'increment_id',
+			'index' => 'order_id',
 			'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Checkawb'
 		));
 		$this->addColumn('billing_name', array(
@@ -58,7 +59,7 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 		if ($config->getConfigXml('xml_debug') == 1)
 		{
 			$this->addColumn('status', array(
-				'header' => Mage::helper('dhlshipment')->__('Xml Sipment Validation'),
+				'header' => Mage::helper('dhlshipment')->__('Xml Shipment Validation'),
 				'align' => 'left',
 				'index' => 'tracking_awb',
 				'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Xmltracking'
@@ -68,7 +69,8 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Grid extends Mage_Adminhtml_Bl
 			'header' => Mage::helper('dhlshipment')->__('Shipment Validation'),
 			'align' => 'left',
 			'index' => 'tracking_awb',
-			'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Awb'
+			'renderer' => 'Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Awb',
+			'width' => 200
 		));
 		if ($config->getConfigXml('xml_debug') == 1)
 		{

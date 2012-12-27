@@ -570,6 +570,8 @@ class Dhl_Dhlshipment_Model_Order_Observer
 		$shippingAddressId = $order->shipping_address_id;
 		$address = Mage::getModel('sales/order_address')->load($shippingAddressId);
 		$weight = substr($order->weight, 0, -5);
+		
+		$weight = ceil($weight);
 
 		$timestamp = time();
 		$data = array();
@@ -1155,6 +1157,7 @@ SCRIPT;
 					break;
 			}
 		}
+//		var_dump($this);exit;
 		return $this;
 	}
 

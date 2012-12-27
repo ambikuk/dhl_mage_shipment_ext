@@ -7,9 +7,14 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Checkawb extends Mage_Adminhtm
 	{
 		$value = $row->getData($this->getColumn()->getIndex());
 		if ($value > 0)
-			return '<a href="' . $this->getUrl('*/*/checkawb', array('id' => $row->getTrackingAwb())) . '" target="_blank">'.$value.'<a>';
+			return '<a href="'.$this->changeUrl($row->getEntityId()).'">'.$value.'<a>';
 		else
 			return 'none';
+	}
+	public function changeUrl($id){
+		$name = $this->getUrl('/sales_order/view', array('order_id' => $id));
+		$url = str_replace('dhlshipment', 'admin', $name);
+		return $url;
 	}
 }
 

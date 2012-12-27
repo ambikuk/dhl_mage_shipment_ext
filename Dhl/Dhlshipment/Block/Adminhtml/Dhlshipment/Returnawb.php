@@ -8,7 +8,7 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Returnawb extends Mage_Adminht
 
 		$value = $row->getData($this->getColumn()->getIndex());
 		if ($value > 0)
-			return '<a href="' . $this->getUrl('*/*/pdf', array('id' => $row->getId(), 'type_xml' => 'return')) . '" target="_blank">' . $value . '</a><span style="text-decoration:none;"> | </span><a href="'.$this->getUrl('*/*/mail', array('id' => $row->getId(),'type_xml'=>'return')).'">Mail</a>';
+			return '<a href="' . $this->getUrl('*/*/pdf', array('id' => $row->getId(), 'type_xml' => 'return')) . '">' . $value . '</a><span style="text-decoration:none;"> | </span><a href="'.$this->getUrl('*/*/mail', array('id' => $row->getId(),'type_xml'=>'return')).'">Mail</a>';
 		elseif (!$row->_origData["tracking_awb"] > 0)
 			return 'none';
 		else

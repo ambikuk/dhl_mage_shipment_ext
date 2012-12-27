@@ -178,7 +178,7 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 	public function returnawbAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		if($this->returnawb($id))
+		if ($this->returnawb($id))
 			$this->_redirect('*/*/');
 	}
 	/*
@@ -275,6 +275,11 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$imagePath = dirname(__FILE__) . '/invoice.png';
 		$image = Zend_Pdf_Image::imageWithPath($imagePath);
 		$page->drawImage($image, 300, 150, 550, 835);
+
+//		$logoPath = dirname(__FILE__) . '/logo.jpg';
+//		$logo = Zend_Pdf_Image::imageWithPath($logoPath);
+//		$page->drawImage($logo, 463, 795, 540, 822);
+
 		$page = $this->contentPdf($page, $model, $xmlResponse);
 
 		$font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_HELVETICA_BOLD);
@@ -342,6 +347,11 @@ class Dhl_Dhlshipment_Adminhtml_DhlshipmentController extends Mage_Adminhtml_Con
 		$imagePath = dirname(__FILE__) . '/invoice2.png';
 		$image = Zend_Pdf_Image::imageWithPath($imagePath);
 		$page->drawImage($image, 300, 150, 550, 835);
+
+//		$logoPath = dirname(__FILE__) . '/logo.jpg';
+//		$logo = Zend_Pdf_Image::imageWithPath($logoPath);
+//		$page->drawImage($logo, 463, 795, 540, 822);
+
 		$page = $this->contentPdf($page, $model, $xmlResponse);
 		$page = $this->contentPdf($page, $model, $xmlResponse);
 		$imagePath = dirname(__FILE__) . '/label2.png';

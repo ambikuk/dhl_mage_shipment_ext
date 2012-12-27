@@ -76,7 +76,7 @@ class CQuote
 	public function send()
 	{
 		$getXml = new Dhl_Dhlshipment_Model_Carrier_Dhlshipment();
-		$request = CDhlToolKit::request($getXml->getConfigXml('gateway_url'))->sendXmlOverPost($this->getXml());
+		$request = CDhlToolKit::request($getXml->getConfigXml('gateway_url'))->sendXmlOverPost($this->getXml());;
 		$this->arrayResponse = CDhlToolKit::request()->getCallBack($request);
 		
 		return $request;
@@ -183,6 +183,7 @@ SCRIPT;
           <Weight>$this->weight</Weight>
         </Piece>
       </Pieces> 
+			<PaymentAccountNumber>$this->paymentAccountNumber</PaymentAccountNumber>
       <IsDutiable>Y</IsDutiable>
       <NetworkTypeCode>AL</NetworkTypeCode>	
       <InsuredValue>0</InsuredValue>
