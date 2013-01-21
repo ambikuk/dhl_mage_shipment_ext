@@ -12,8 +12,9 @@ class Dhl_Dhlshipment_Block_Adminhtml_Dhlshipment_Checkawb extends Mage_Adminhtm
 			return 'none';
 	}
 	public function changeUrl($id){
+		$adminUrl = (string)Mage::getConfig()->getNode('admin/routers/adminhtml/args/frontName');
 		$name = $this->getUrl('/sales_order/view', array('order_id' => $id));
-		$url = str_replace('dhlshipment', 'admin', $name);
+		$url = str_replace('dhlshipment', $adminUrl, $name);
 		return $url;
 	}
 }
